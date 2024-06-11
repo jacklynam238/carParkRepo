@@ -24,7 +24,7 @@ h1 {
 }
 .book-now {
     display: block;
-    font-size: 8.1px;
+    font-size: 20px;
     padding: 10px 20px;
     color: white;
     background-color: #526340; /* Button background color */
@@ -81,5 +81,3 @@ ul {
   position: fixed;
   top: 0;
   width: 100%;
-}
-

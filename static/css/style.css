@@ -1,0 +1,85 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('/images/background.png');
+    background-size: cover; /* Cover the entire page */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-attachment: fixed; /* Fixed background image */
+    background-position: center; /* Center the background image */
+    margin: 0;
+    font-family: 'Roboto';
+}
+
+.logo {
+    width: 100px; /* Adjust the width as needed */
+    height: auto;
+}
+
+h1 {
+    font-size: 10em;
+    color: white;
+    opacity: .8;
+    width: 100%;
+    text-align: center;
+}
+.book-now {
+    display: block;
+    font-size: 1.2em;
+    padding: 10px 20px;
+    color: white;
+    background-color: #526340; /* Button background color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.book-now:hover {
+    background-color: #64784e; /* Button background color on hover */
+}
+
+nav {
+    padding: 0;
+    margin: 0;
+}
+
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #526340;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #64784e  ;
+}
+li a:hover {
+  background-color: #64784e;
+}
+
+li a img {
+ padding: 0;
+ margin: 0;
+}
+ul {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="../static/css/booking.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="background-tint">
+<nav>
+  <ul>
+    <li><a class="active" href="#Home"><img src="/images/ericsson text logo.png" alt="Logo" class="logo"></a></li>
+    <li style="float:right"><a class="active" href="#Sign-up">Sign-up</a></li>
+    <li style="float:right"><a class="active" href="#Log-in">Log-in</a></li>
+  </ul>
+</nav>
+
+<div class="welcome-container">
+  <h1>Book Now</h1>
+</div>
+
+<!-- Booking Section -->
+<div class="booking-container">
+  <h2>Book Your parking spot</h2>
+  <form id="booking-form" action="/submit-booking" method="POST">
+    <div class="form-group">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone" required>
+    </div>
+    <div class="form-group">
+      <label for="date">Booking Date</label>
+      <input type="date" id="date" name="date" required>
+    </div>
+    <div class="form-group">
+      <label for="time">Booking Time</label>
+      <input type="time" id="time" name="time" required>
+    </div>
+    <button type="submit">Book Now</button>
+  </form>
+</div>
+
+</body>
+</html>

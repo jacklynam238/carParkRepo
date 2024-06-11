@@ -1,0 +1,113 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('/images/background.png');
+    background-size: cover; /* Cover the entire page */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-attachment: fixed; /* Fixed background image */
+    background-position: center; /* Center the background image */
+    margin: 0;
+    font-family: 'Roboto';
+}
+.logo {
+    width: 100px; /* Adjust the width as needed */
+    height: auto;
+}
+
+h1 {
+    font-size: 10em;
+    color: white;
+    text-align: center;
+    opacity: .8;
+
+}
+
+nav {
+    padding: 0;
+    margin: 0;
+}
+
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #526340;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #64784e  ;
+}
+li a:hover {
+  background-color: #64784e;
+}
+
+li a img {
+ padding: 0;
+ margin: 0;
+}
+ul {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  width: 100%;
+}
+.signupContainer {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align:center;
+}
+
+.signupContainer h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #526340;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4784e;
+}

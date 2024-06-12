@@ -14,13 +14,6 @@ body {
     width: 100px; /* Adjust the width as needed */
     height: auto;
 }
-h1 {
-    font-size: 10em;
-    color: white;
-    opacity: .8;
-    text-align: center;
-
-}
 
 nav {
     padding: 0;
@@ -59,8 +52,18 @@ li a img {
  padding: 0;
  margin: 0;
 }
+
+h1 {
+    font-size: 10em;
+    color: white;
+    opacity: .8;
+    text-align: center;
+
+
+}
 ul {
   position: fixed;
+  z-index: 100;
   top: 0;
   width: 100%;
 }

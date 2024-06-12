@@ -42,7 +42,7 @@
 
 .content-container {
     background: white;
-    width: auto;
+    width: 80vw;
     height: auto;
     display: flex;
     flex-flow: column;

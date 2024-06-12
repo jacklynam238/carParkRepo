@@ -6,16 +6,14 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: url('/images/neon blue car.png');
-    background-size: cover; /* Cover the entire page */
+    background-image: url('/images/blue car banner.png');
+    background-size: 100vw; /* Cover the entire page */
     background-repeat: no-repeat; /* Do not repeat the image */
     background-attachment: fixed; /* Fixed background image */
-    background-position: center; /* Center the background image */
+    background-position: left top -2px; /* Center the background image */
     margin: 0;
     font-family: 'Roboto';
     overflow-x: hidden;
-    background-color: rgba(0, 0, 0, 0.3);
-    background-blend-mode: multiply;
 }
 
 .logo {

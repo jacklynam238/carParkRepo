@@ -3,8 +3,9 @@
     align-items: center;
     justify-content: right;
     height: 80vh;
-    width: 84vw;
-    padding: 0 8vw;
+    width: 84%;
+    padding: 0 8%;
+    max-width: 100%;
 }
 
 .welcome-container h1 {
@@ -42,11 +43,12 @@
 
 .content-container {
     background: white;
-    width: 80vw;
+    width: 80%;
     height: auto;
     display: flex;
     flex-flow: column;
     height: 100%;
-    padding: 10vw;
+    padding: 10% 10vw;
     margin: 0;
+    max-width: 100%;
 }

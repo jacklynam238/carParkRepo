@@ -7,15 +7,13 @@ body {
     margin: 0;
     padding: 0;
     background-image: url('../../images/jack wanted this new car.png');
-    background-size: 100vw; /* Cover the entire page */
+    background-size: 100%; /* Cover the entire page */
     background-repeat: no-repeat; /* Do not repeat the image */
     background-attachment: fixed; /* Fixed background image */
     background-position: left top -2px; /* Center the background image */
     margin: 0;
-    font-family: 'Roboto';/*
-background: rgb(2,0,36);
-background: linear-gradient(90deg, rgba(2,0,36,0) 0%, rgba(1,0,15,0.26952030812324934) 54%, rgba(0,0,0,0.6224614845938375) 100%);
-background-blend-mode: multiply;*/
+    font-family: 'Roboto';
+    overflow-x: hidden;
 }
 
 .logo {

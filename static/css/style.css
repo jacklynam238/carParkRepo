@@ -1,4 +1,4 @@
-body {
+    body {
     margin: 0;
     padding: 0;
     background-image: url('/images/background.png');
@@ -26,58 +26,55 @@ h1 {
     display: block;
     font-size: 20px;
     padding: 10px 20px;
-    color: white;
+    margin-left: auto;
+    margin-right: auto;
     background-color: #526340; /* Button background color */
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-left: auto;
-    margin-right: auto;
+    transition: background-color 0.1s ease-in-out;
+    color: white;
+    text-decoration: none;
+    font-family: 'roboto';
 }
 
 .book-now:hover {
     background-color: #64784e; /* Button background color on hover */
 }
 
-nav {
+nav ul {
+    list-style-type: none;
     padding: 0;
     margin: 0;
+    background-color: #526340;
+    overflow: hidden;
+    height: 50px;
 }
 
-
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #526340;
+nav ul li {
+    float: left;
+    height: 100%
 }
 
-li {
-  float: left;
+nav ul li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    height: 100%;
 }
 
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+nav ul li a.active {
+    background-color: #526340;
 }
 
-li a:hover {
-  background-color: #64784e  ;
-}
-li a:hover {
-  background-color: #64784e;
+nav ul li a:hover {
+    background-color: #64784e;
 }
 
-li a img {
- padding: 0;
- margin: 0;
+nav ul li img.logo {
+    width: 100px;
+    vertical-align: middle;
 }
-ul {
-  position: fixed;
-  top: 0;
-  width: 100%;
+

@@ -1,0 +1,59 @@
+@font-face {
+  font-family: Ericsson;
+  src: url("../../fonts/RundReg.otf") format("opentype");
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('/images/neon blue car.png');
+    background-size: cover; /* Cover the entire page */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-attachment: fixed; /* Fixed background image */
+    background-position: center; /* Center the background image */
+    margin: 0;
+    font-family: 'Roboto';
+}
+
+.logo {
+    width: 100px; /* Adjust the width as needed */
+    height: auto;
+}
+
+nav {
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #002561;
+  height: 50px;
+}
+
+li {
+  float: left;
+  height: 100%;
+  display: block;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  font-family: 'Ericsson';
+  text-decoration: none;
+  height: 100%;
+}
+
+li a:hover {
+  background-color: #003a99  ;
+}
+
+li a img {
+  height: 100%;
+}

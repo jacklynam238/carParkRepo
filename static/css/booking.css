@@ -21,7 +21,7 @@ nav ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
-    background-color: #1174e6;
+    background-color: #002561;
     overflow: hidden;
     height: 50px;
 }
@@ -41,11 +41,11 @@ nav ul li a {
 }
 
 nav ul li a.active {
-    background-color: #1174e6;
+    background-color: #002561;
 }
 
 nav ul li a:hover {
-    background-color: #1174e6;
+    background-color: #003a99;
 }
 
 nav ul li img.logo {

@@ -8,6 +8,8 @@
     background-position: center; /* Center the background image */
     margin: 0;
     font-family: 'Roboto';
+    background-color: rgba(150, 150, 200, 0.5);
+    background-blend-mode: multiply;
 }
 
 .logo {

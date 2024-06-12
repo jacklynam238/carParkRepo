@@ -6,8 +6,8 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: url('/images/blue car banner.png');
-    background-size: 100vw; /* Cover the entire page */
+    background-image: url('../../images/jack wanted this new car.png');
+    background-size: 100%; /* Cover the entire page */
     background-repeat: no-repeat; /* Do not repeat the image */
     background-attachment: fixed; /* Fixed background image */
     background-position: left top -2px; /* Center the background image */

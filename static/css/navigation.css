@@ -13,6 +13,9 @@ body {
     background-position: center; /* Center the background image */
     margin: 0;
     font-family: 'Roboto';
+    overflow-x: hidden;
+    background-color: rgba(0, 0, 0, 0.3);
+    background-blend-mode: multiply;
 }
 
 .logo {

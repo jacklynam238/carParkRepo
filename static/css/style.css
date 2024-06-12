@@ -1,10 +1,43 @@
 .welcome-container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: right;
     height: 50vh;
     width: 84vw;
     padding: 0 8vw;
+}
+
+.welcome-container h1 {
+    font-size: 5em;
+    color: white;
+    opacity: .8;
+    text-align: center;
+    font-family: 'Ericsson';
+    font-weight: 100;
+    vertical-align: top;
+    height: 110px;
+}
+
+.welcome-container button {
+    display: block;
+    padding: 10px 20px;
+    background-color: #1174e6; /* Button background color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 30px;
+}
+
+.welcome-container button a {
+    font-family: 'Ericsson';
+    color: white;
+    font-size: 20px;
+    text-decoration: white;
+}
+
+.welcome-container button:hover {
+    background-color: #1174e6; /* Button background color on hover */
 }
 
 .content-container {
@@ -16,32 +49,4 @@
     height: 100%;
     padding: 10vw;
     margin: 0;
-}
-
-h1 {
-    font-size: 5em;
-    color: white;
-    opacity: .8;
-    text-align: center;
-    font-family: 'Ericsson';
-    font-weight: 100;
-}
-
-.book-now {
-    display: block;
-    font-size: 20px;
-    padding: 10px 20px;
-    color: white;
-    background-color: #1174e6; /* Button background color */
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-left: auto;
-    margin-right: auto;
-    font-family: 'Ericsson';
-}
-
-.book-now:hover {
-    background-color: #1174e6; /* Button background color on hover */
 }

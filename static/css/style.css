@@ -27,7 +27,7 @@ h1 {
     font-size: 20px;
     padding: 10px 20px;
     color: white;
-    background-color: #526340; /* Button background color */
+    background-color: #1174e6; /* Button background color */
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -37,7 +37,7 @@ h1 {
 }
 
 .book-now:hover {
-    background-color: #64784e; /* Button background color on hover */
+    background-color: #1174e6; /* Button background color on hover */
 }
 
 nav {

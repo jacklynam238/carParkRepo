@@ -43,7 +43,7 @@ input[type="text"], input[type="email"], textarea {
 }
 
 input[type="submit"] {
-    background-color: #526340;
+    background-color: #1174e6;
     color: white;
     padding: 12px 20px;
     border: none;
@@ -52,5 +52,5 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #64784e;
+    background-color: #1174e6;
 }

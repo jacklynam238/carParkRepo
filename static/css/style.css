@@ -1,32 +1,32 @@
-@font-face {
-  font-family: EricssonSans;
-  src: url("../../fonts/EricssonSans-Bold.otf") format("opentype");
+.welcome-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50vh;
+    width: 84vw;
+    padding: 0 8vw;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    background-image: url('/images/neon blue car.png');
-    background-size: cover; /* Cover the entire page */
-    background-repeat: no-repeat; /* Do not repeat the image */
-    background-attachment: fixed; /* Fixed background image */
-    background-position: center; /* Center the background image */
-    margin: 0;
-    font-family: 'Roboto';
-}
-
-.logo {
-    width: 100px; /* Adjust the width as needed */
+.content-container {
+    background: white;
+    width: auto;
     height: auto;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    padding: 10vw;
+    margin: 0;
 }
 
 h1 {
-    font-size: 10em;
+    font-size: 5em;
     color: white;
     opacity: .8;
-    width: 100%;
     text-align: center;
+    font-family: 'Ericsson';
+    font-weight: 100;
 }
+
 .book-now {
     display: block;
     font-size: 20px;
@@ -39,50 +39,9 @@ h1 {
     transition: background-color 0.3s ease;
     margin-left: auto;
     margin-right: auto;
-    font-family: 'EricssonSans';
+    font-family: 'Ericsson';
 }
 
 .book-now:hover {
     background-color: #1174e6; /* Button background color on hover */
 }
-
-nav {
-    padding: 0;
-    margin: 0;
-}
-
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #002561;
-}
-
-li {
-  float: left;
-}
-
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-li a:hover {
-  background-color: #003a99  ;
-}
-li a:hover {
-  background-color: #003a99;
-}
-
-li a img {
- padding: 0;
- margin: 0;
-}
-ul {
-  position: fixed;
-  top: 0;
-  width: 100%;

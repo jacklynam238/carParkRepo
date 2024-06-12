@@ -22,49 +22,42 @@ h1 {
 
 }
 
-nav {
+nav ul {
+    list-style-type: none;
     padding: 0;
     margin: 0;
+    background-color: #526340;
+    overflow: hidden;
+    height: 50px;
 }
 
-
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #526340;
+nav ul li {
+    float: left;
+    height: 100%
 }
 
-li {
-  float: left;
+nav ul li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    height: 100%;
 }
 
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+nav ul li a.active {
+    background-color: #526340;
 }
 
-li a:hover {
-  background-color: #64784e  ;
-}
-li a:hover {
-  background-color: #64784e;
+nav ul li a:hover {
+    background-color: #64784e;
 }
 
-li a img {
- padding: 0;
- margin: 0;
+nav ul li img.logo {
+    width: 100px;
+    vertical-align: middle;
 }
-ul {
-  position: fixed;
-  z-index: 100;
-  top: 0;
-  width: 100%;
-}
+
 .signupContainer {
     background-color: #fff;
     padding: 20px;

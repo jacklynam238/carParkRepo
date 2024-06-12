@@ -10,32 +10,16 @@ body {
     font-family: 'Roboto';
 }
 
-
-
 .logo {
     width: 100px; /* Adjust the width as needed */
     height: auto;
 }
-
 h1 {
-    font-size: 8em;
+    font-size: 10em;
     color: white;
     opacity: .8;
     text-align: center;
-}
-.book-now {
-    font-size: 1.2em;
-    padding: 10px 20px;
-    color: white;
-    background-color: #526340; /* Button background color */
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
 
-.book-now:hover {
-    background-color: #64784e; /* Button background color on hover */
 }
 
 nav {
@@ -92,5 +76,4 @@ ul {
     display block;
     width: 65%;
     text-align: justify;
-
 }

@@ -13,23 +13,36 @@
         <li><a class="active" href="index.html"><img src="/images/ericsson text logo.png" alt="Logo" class="logo"></a></li>
         <li style="float:right"><a class="active" href="signup.html">Sign-up</a></li>
         <li style="float:right"><a class="active" href="login.html">Log-in</a></li>
+<<<<<<< HEAD
             <li style="float:right"><a class="active" href="contact.html">contact us</a></li>
+=======
+        <li style="float:right"><a class="active" href="about.html">About</a></li>
+        <li style="float:right"><a class="active" href="contact.html">Contact</a></li>
+>>>>>>> d10ae4d908c678f03b1f70196dfa185f257422fc
         </ul>
     </nav>
     <h1>Contact Us</h1>
-    <p> It may take around seven business days before we get back to you. If you don't want to wait that long, head to our Terms and Conditions section. Maybe there's the answer you are looking for.
-       Terms and conditions Whatever information you're looking for, you'll find it here.
-       Have a question or suggestion? Send us an e-mail at: christian.obrien@ericsson.com
-        and we'll get back to you as soon as possible. </p>
+     <div class="container">
+        <p> It may take around seven business days before we get back to you.
+            If you don't want to wait that long, head to our about page
+            section. Maybe there's the answer you are looking for.
+             Whatever information you're looking for,
+            you'll find it here. <br><br>
+            Have a question or suggestion? Send us an e-mail
+            at: christian.obrien@ericsson.com and we'll get back to you as soon as
+            possible.</p>
+        <form>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+
+            <input type="submit" value="Submit">
+        </form>
     </div>
-    <form action="/submit_form" method="post">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <label for="message">Message:</label>
-        <input id="message" name="message" required>
-    </form>
- <input type="submit" value="Submit" name="submit">
 </body>
 </html>

@@ -48,7 +48,12 @@
     display: flex;
     flex-flow: column;
     height: 100%;
-    padding: 10% 10vw;
+    padding: 7% 10vw;
     margin: 0;
     max-width: 100%;
+    font-family: 'Ericsson';
+}
+
+.content-container h1 {
+    font-size: 3em;
 }

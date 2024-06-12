@@ -33,7 +33,7 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #526340;
+  background-color: #002561;
 }
 
 li {
@@ -49,10 +49,10 @@ li a {
 }
 
 li a:hover {
-  background-color: #64784e  ;
+  background-color: #003a99;
 }
 li a:hover {
-  background-color: #64784e;
+  background-color: #003a99;
 }
 
 li a img {

@@ -1,4 +1,4 @@
-body {
+    body {
     margin: 0;
     padding: 0;
     background-image: url('/images/background.png');
@@ -26,147 +26,55 @@ h1 {
     display: block;
     font-size: 20px;
     padding: 10px 20px;
-    color: white;
+    margin-left: auto;
+    margin-right: auto;
     background-color: #526340; /* Button background color */
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-left: auto;
-    margin-right: auto;
+    transition: background-color 0.1s ease-in-out;
+    color: white;
+    text-decoration: none;
+    font-family: 'roboto';
 }
 
 .book-now:hover {
     background-color: #64784e; /* Button background color on hover */
 }
 
-nav {
+nav ul {
+    list-style-type: none;
     padding: 0;
     margin: 0;
+    background-color: #526340;
+    overflow: hidden;
+    height: 50px;
 }
 
-
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #526340;
+nav ul li {
+    float: left;
+    height: 100%
 }
 
-li {
-  float: left;
+nav ul li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    height: 100%;
 }
 
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+nav ul li a.active {
+    background-color: #526340;
 }
 
-li a:hover {
-  background-color: #64784e  ;
-}
-li a:hover {
-  background-color: #64784e;
+nav ul li a:hover {
+    background-color: #64784e;
 }
 
-li a img {
- padding: 0;
- margin: 0;
-}
-ul {
-  position: fixed;
-  top: 0;
-  width: 100%;
-}
-* {box-sizing:border-box}
-
-/* Slideshow container */
-.slideshow-container {
-  max-width: 800px;
-  position: relative;
-  margin: auto;
-  padding: 16px;
+nav ul li img.logo {
+    width: 100px;
+    vertical-align: middle;
 }
 
-/* Hide the images by default */
-.mySlides {
-  display: none;
-}
-
-/* Next & previous buttons */
-.prev, .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  margin-top: -22px;
-  padding: 30px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-}
-
-/* Position the "next button" to the right */
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
-
-/* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
-}
-
-/* Caption text */
-.text {
-  color: #f2f2f2;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
-}
-
-/* Number text (1/3 etc) */
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
-
-/* The dots/bullets/indicators */
-.dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
-
-.active, .dot:hover {
-  background-color: #717171;
-}
-
-/* Fading animation */
-.fade {
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
-
-@keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
-}

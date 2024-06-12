@@ -61,7 +61,7 @@ nav ul li img.logo {
 h1 {
     color: #333;
 }
-
+/*
 .container {
     background-color: #f9f9f9;
     margin: 100px auto;
@@ -70,12 +70,7 @@ h1 {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-
-.container p {
-    font-size: 18px;
-    margin-bottom: 20px;
-}
-
+*/
 form {
     background-color: transparent; /* Form inherits the container's background */
     padding: 0;
@@ -109,4 +104,18 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     background-color: #64784e;
+}
+
+.bg-paragraph {
+    background-color: #fff; /* Light Khaki background color */
+    padding: 40px 50px;            /* Padding inside the paragraph */
+    border-radius: 5px;       /* Rounded corners */
+    color: #333;              /* Text color */
+    font-size: 1.1em;          /* Font size */
+    font-family: Arial, sans-serif; /* Font family */
+    margin-left: auto;
+    margin-right: auto;
+    display block;
+    width: 65%;
+    text-align: justify;
 }

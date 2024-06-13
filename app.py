@@ -25,17 +25,10 @@ def index():
     print(item_names)
     return render_template('index.html', items=item_names)
 
-# app = Flask(__name__)
+#app = Flask(__name__)
 #
 # list_of_items = ['moo', 'ma', 'mey']
 #
-# @app.route('/', methods=['POST', 'GET'])
-# def index():
-#     if request.method == "POST":
-#         item = request.form['item']
-#         list_of_items.append(item)
-#     return render_template('index.html', items=list_of_items)
-
 @app.route('/booking')
 def booking():
     return render_template('booking.html')

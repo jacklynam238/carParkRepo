@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-      <link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
+      <link rel="stylesheet" href="../static/css/style.css">
+      <link rel="stylesheet" href="../static/css/navigation.css">
     </head>
     <body class="background-tint">
         <nav>
@@ -12,7 +12,7 @@
                 <li style="float:right"><a class="active" href="login.html">Log-in</a></li>
                 <li style="float:right"><a class="active" href="about.html">About</a></li>
                 <li style="float:right"><a class="active" href="contact.html">Contact</a></li>
-                <li style="float:right"><a class="active" href="/booking">Book Now</a></li>
+                <li style="float:right"><a class="active" href="booking.html">Book Now</a></li>
             </ul>
         </nav>
         <div class="welcome-container">
@@ -20,70 +20,58 @@
             <button><a href="booking.html">Book Now</a></button>
         </div>
         <div class="content-container">
-            <h1>EPark</h1>
-            <p>At ePark, located within the Ericsson premises,
-                we provide an efficient and easy-to-use car charging station exclusively for our
-                employees and visitors. Our goal is to support your commitment to sustainable transportation
-                by offering a reliable and seamless charging experience right where you work.<br><br> By using ePark, you're
-                joining a community of eco-conscious individuals dedicated to promoting sustainable practices. Enjoy the convenience
-                of on-site charging and contribute to a greener future. <br><br>Thank you for choosing ePark at Ericsson. Your journey to sustainable transportation starts here.
-                </p>
 
-            <form action="/" method="POST">
-                <input type="text" name="item">
-                <button type="submit">Get Stuff</button>
-            </form>
-
-            <ul>
-                {% for item in items %}
-                <li> {{item}} </li>
-                {% endfor %}
-            </ul>
-
-            <div class="slideshow-container">
-                <div class="mySlides fade">
-                    <img src="/images/img5.jpg" style="width:100%; height: 100%;">
-                    <div class="text"></div>
-                </div>
-
-                <div class="mySlides fade">
-                    <img src="/images/img6.jpg" style="width:100%; height: 100%;">
-                    <div class="text"></div>
-                </div>
-
-                <div class="mySlides fade">
-                    <img src="/images/img7.jpg" style="width:100%; height: 100%;">
-                    <div class="text"></div>
-                </div>
-            </div>
-            <br>
-
-            <div style="text-align:center">
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-            </div>
+           <p>Welcome to Ericsson's state-of-the-art electric car parking facility! Designed to support our commitment to sustainability, our parking area is equipped with modern charging stations, ample parking spaces, and convenient access for electric vehicles. Whether you're an employee or a visitor, we ensure your electric car is charged and ready to go, contributing to a greener future.</p>
         </div>
-        <script>
-            let slideIndex = 0;
-        showSlides();
+<div class="slideshow-container">
 
-        function showSlides() {
-          let i;
-          let slides = document.getElementsByClassName("mySlides");
-          let dots = document.getElementsByClassName("dot");
-          for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-          }
-          slideIndex++;
-          if (slideIndex > slides.length) {slideIndex = 1}
-          for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
-          }
-          slides[slideIndex-1].style.display = "block";
-          dots[slideIndex-1].className += " active";
-          setTimeout(showSlides, 2000); // Change image every 2 seconds
-        }
-        </script>
+<div class="mySlides fade">
+  <div class="numbertext">1 / 3</div>
+  <img src="/images/img5.jpg" style="width:100%">
+  <div class="text"></div>
+</div>
+
+<div class="mySlides fade">
+  <div class="numbertext">2 / 3</div>
+  <img src="/images/img6.jpg" style="width:100%">
+  <div class="text"></div>
+</div>
+
+<div class="mySlides fade">
+  <div class="numbertext">3 / 3</div>
+  <img src="/images/img7.jpg" style="width:100%">
+  <div class="text"></div>
+</div>
+
+</div>
+<br>
+
+<div style="text-align:center">
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+</div>
+
+<script>
+    let slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+  setTimeout(showSlides, 2000); // Change image every 2 seconds
+}
+</script>
     </body>
 </html>

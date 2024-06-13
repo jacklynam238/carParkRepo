@@ -1,20 +1,20 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 
-USERNAME = 'root'
-PASSWORD = ''
-HOST = 'localhost'
-DB_NAME = 'booking_db'
+# USERNAME = 'root'
+# PASSWORD = ''
+# HOST = 'localhost'
+# DB_NAME = 'booking_db'
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://' + USERNAME + ':' + PASSWORD + '@' + HOST + '/' + DB_NAME
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
-
-class Item(db.Model):
-    __tablename__ = 'test_table'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://' + USERNAME + ':' + PASSWORD + '@' + HOST + '/' + DB_NAME
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# db = SQLAlchemy(app)
+#
+# class Item(db.Model):
+#     __tablename__ = 'test_table'
+#     id = db.Column(db.Integer, primary_key=True)
+#     name = db.Column(db.String)
 
 @app.route('/')
 def index():
@@ -43,10 +43,8 @@ def contact():
 @app.route('/submit_booking', methods=['POST'])
 def submit_booking():
     if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
         date = request.form['date']
         time = request.form['time']
-        print(email, password, date, time)
-        return render_template('index.html')
+        print(date, time)
+        return render_template('index.html') #Thank you page
     return render_template('booking.html')

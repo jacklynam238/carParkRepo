@@ -5,13 +5,13 @@ body {
 .welcome-container {
     display: flex;
     align-items: center;
-    justify-content: left;
+    justify-content: right;
     height: 50vh;
     width: 84%;
     padding: 0 8%;
     max-width: 100%;
     background: rgb(2,0,36);
-    background: linear-gradient(90deg, rgba(2,0,36,0.5) 0%, rgba(1,0,15,0.2) 34%, rgba(0,0,0,0) 100%);
+    background: linear-gradient(-90deg, rgba(2,0,36,0.5) 0%, rgba(1,0,15,0.2) 34%, rgba(0,0,0,0) 100%);
 }
 
 .welcome-container h1 {

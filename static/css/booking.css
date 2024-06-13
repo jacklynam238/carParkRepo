@@ -1,23 +1,39 @@
 .welcome-container {
-    text-align: center;
-    font-size: 4em;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    height: 50vh;
+    width: 84%;
+    padding: 0 8%;
+    max-width: 100%;
+}
+
+.welcome-container h1 {
+    font-size: 5em;
     color: white;
     opacity: .8;
-}
-
-.booking-container {
-    background-color: #fff;
-    padding: 20px;
-    margin: 20px auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
     text-align: center;
+    font-family: 'Ericsson';
+    font-weight: 100;
+    vertical-align: top;
+    height: 110px;
 }
 
-.booking-container h2 {
-    margin-bottom: 20px;
+.content-container {
+    background: white;
+    width: 80%;
+    height: auto;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    padding: 7% 10vw;
+    margin: 0;
+    max-width: 100%;
+    font-family: 'Ericsson';
+}
+
+.content-container h1 {
+    font-size: 3em;
 }
 
 .form-group {
@@ -36,6 +52,8 @@ input {
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-family: 'Ericsson';
+
 }
 
 button {

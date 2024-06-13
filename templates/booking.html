@@ -2,7 +2,7 @@
 <html>
 <head>
       <link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
-     <link rel="stylesheet" href="{{ url_for('static', filename='css/booking.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/booking.css') }}">
 </head>
 <body class="background-tint">
 <nav>
@@ -21,8 +21,8 @@
 </div>
 
 <!-- Booking Section -->
-<div class="booking-container">
-  <h2>Book Your parking spot</h2>
+<div class="content-container">
+  <h1>Book Your parking spot</h1>
   <form id="booking-form" action="{{ url_for('submit_booking') }}" method="POST">
     <div class="form-group">
       <label for="date">Booking Date</label>

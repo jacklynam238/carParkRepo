@@ -1,5 +1,5 @@
 body {
-    background-image: url('../../images/ericsson building inside.jfif');
+    background-image: url="{{ url_for('static', filename='css/') }}";
 }
 
 .welcome-container {

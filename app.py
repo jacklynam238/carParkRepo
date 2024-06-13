@@ -11,19 +11,31 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://' + USERNAME + ':' + PA
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-
 class Item(db.Model):
-    __tablename__ = 'booking_table'
+    __tablename__ = 'test_table'
     id = db.Column(db.Integer, primary_key=True)
-    startTime = db.Column(db.DateTime)
-    parkLength = db.Column(db.Integer)
+    name = db.Column(db.String)
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    if request.method == 'POST':
-        item_id = request.form['item']
-        db.session.add(item)
-        db.session.commit()
-        return redirect(url_for('index'))
-
     items = Item.query.all()
-    return render_template('index.html')
+    item_names = []
+    for item in items:
+        item_names.append(item.name)
+    print(item_names)
+    return render_template('index.html', items=item_names)
+
+# app = Flask(__name__)
+#
+# list_of_items = ['moo', 'ma', 'mey']
+#
+# @app.route('/', methods=['POST', 'GET'])
+# def index():
+#     if request.method == "POST":
+#         item = request.form['item']
+#         list_of_items.append(item)
+#     return render_template('index.html', items=list_of_items)
+
+@app.route('/booking')
+def booking():
+    return render_template('booking.html')

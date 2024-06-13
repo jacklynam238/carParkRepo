@@ -12,7 +12,7 @@
                 <li style="float:right"><a class="active" href="login.html">Log-in</a></li>
                 <li style="float:right"><a class="active" href="about.html">About</a></li>
                 <li style="float:right"><a class="active" href="contact.html">Contact</a></li>
-                <li style="float:right"><a class="active" href="booking.html">Book Now</a></li>
+                <li style="float:right"><a class="active" href="/booking">Book Now</a></li>
             </ul>
         </nav>
         <div class="welcome-container">
@@ -29,13 +29,14 @@
                 of on-site charging and contribute to a greener future. <br><br>Thank you for choosing ePark at Ericsson. Your journey to sustainable transportation starts here.
                 </p>
 
-            <form action="/" method="GET">
+            <form action="/" method="POST">
+                <input type="text" name="item">
                 <button type="submit">Get Stuff</button>
             </form>
 
             <ul>
                 {% for item in items %}
-                <li> {item} </li>
+                <li> {{item}} </li>
                 {% endfor %}
             </ul>
 

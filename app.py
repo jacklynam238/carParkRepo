@@ -21,9 +21,9 @@ class Item(db.Model):
 def index():
     if request.method == 'POST':
         item_id = request.form['item']
-        db.session.add(item)
-        db.session.commit()
-        return redirect(url_for('index'))
+        #db.session.add(item)
+        #db.session.commit()
+        #return redirect(url_for('index'))
 
-    items = Item.query.all()
+    #items = Item.query.all()
     return render_template('index.html')

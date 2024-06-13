@@ -16,26 +16,21 @@ class Item(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def index():
-    items = Item.query.all()
-    item_names = []
-    for item in items:
-        item_names.append(item.name)
-    print(item_names)
-    return render_template('index.html', items=item_names)
+    return render_template('index.html')
 
-# app = Flask(__name__)
-#
-# list_of_items = ['moo', 'ma', 'mey']
-#
-# @app.route('/', methods=['POST', 'GET'])
-# def index():
-#     if request.method == "POST":
-#         item = request.form['item']
-#         list_of_items.append(item)
-#     return render_template('index.html', items=list_of_items)
-
-@app.route('/booking')
+@app.route('/booking', methods=['GET', 'POST'])
 def booking():
+    return render_template('booking.html')
+
+@app.route('/submit_booking', methods=['POST'])
+def submit_booking():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        date = request.form['date']
+        time = request.form['time']
+        print(email, password, date, time)
+        return render_template('index.html')
     return render_template('booking.html')

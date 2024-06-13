@@ -43,10 +43,8 @@ def contact():
 @app.route('/submit_booking', methods=['POST'])
 def submit_booking():
     if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
         date = request.form['date']
         time = request.form['time']
-        print(email, password, date, time)
-        return render_template('index.html')
+        print(date, time)
+        return render_template('index.html') #Thank you page
     return render_template('booking.html')

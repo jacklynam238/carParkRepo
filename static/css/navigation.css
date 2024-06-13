@@ -1,12 +1,12 @@
 @font-face {
   font-family: Ericsson;
-  src: url("../../fonts/RundReg.otf") format("opentype");
+  src: url('../fonts/RundReg.otf') format("opentype");
 }
 
 body {
     margin: 0;
     padding: 0;
-    background-image: url('../../images/jack wanted this new car.png');
+    background-image: url('../images/jack wanted this new car.png');
     background-size: 100%; /* Cover the entire page */
     background-repeat: no-repeat; /* Do not repeat the image */
     background-attachment: fixed; /* Fixed background image */

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <link rel="stylesheet" href="../static/css/style.css">
-      <link rel="stylesheet" href="../static/css/navigation.css">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
     </head>
     <body class="background-tint">
         <nav>
@@ -28,6 +28,16 @@
                 joining a community of eco-conscious individuals dedicated to promoting sustainable practices. Enjoy the convenience
                 of on-site charging and contribute to a greener future. <br><br>Thank you for choosing ePark at Ericsson. Your journey to sustainable transportation starts here.
                 </p>
+
+            <form action="/" method="GET">
+                <button type="submit">Get Stuff</button>
+            </form>
+
+            <ul>
+                {% for item in items %}
+                <li> {item} </li>
+                {% endfor %}
+            </ul>
 
             <div class="slideshow-container">
                 <div class="mySlides fade">

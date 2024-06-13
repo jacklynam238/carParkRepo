@@ -1,5 +1,5 @@
 body {
-    background-image: url="{{ url_for('static', filename='css/') }}";
+    background-image: url("../images/img5.jpg");
 }
 
 .welcome-container {

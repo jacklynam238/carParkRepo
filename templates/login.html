@@ -2,37 +2,21 @@
 <html>
 <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
 </head>
 <body class="background-tint">
-    <nav>
-       <ul>
-           <li><a class="active" href="/"><img src="{{ url_for('static', filename='images/ericsson text logo.png')}}" alt="Logo" class="logo"></a></li>
-           <li style="float:right"><a class="active" href="/signup">Sign-up</a></li>
-           <li style="float:right"><a class="active" href="/login">Log-in</a></li>
-           <li style="float:right"><a class="active" href="/about">About</a></li>
-           <li style="float:right"><a class="active" href="/contact">Contact</a></li>
-           <li style="float:right"><a class="active" href="/booking">Book Now</a></li>
-      </ul>
-    </nav>
-
-    <div class="welcome-container">
-      <h1>Log In</h1>
-    </div>
-
     <div class="log-in-container">
-      <h2>Log In</h2>
-      <form id="booking-form" action="/submit-booking" method="POST">
-        <div class="form-group">
-          <label for="email">Email Address</label>
-          <input type="email" id="email" name="email" required>
-        </div>
-           <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-        <button type="submit">Log In</button>
-      </form>
+          <h2>Log In</h2>
+          <form id="booking-form" action="/submit-booking" method="POST">
+              <div class="form-group">
+                  <label for="email">Email Address</label>
+                  <input type="email" id="email" name="email" required>
+              </div>
+              <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" id="password" name="password" required>
+              </div>
+              <button type="submit">Log In</button>
+          </form>
     </div>
 </body>
 </html>

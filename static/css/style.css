@@ -58,11 +58,6 @@
     font-size: 3em;
 }
 
-.content-container ul {
-    background: none;
-    padding: 20px;
-}
-
-.content-container ul li {
-    padding: 0 10px;
+.content-container p {
+    margin-bottom: 60px;
 }

@@ -6,18 +6,18 @@
     </head>
     <body class="background-tint">
         <nav>
-            <ul>
-                <li><a class="active" href="/"><img src="{{ url_for('static', filename='images/ericsson text logo.png')}}" alt="Logo" class="logo"></a></li>
-                <li style="float:right"><a class="active" href="/signup">Sign-up</a></li>
-                <li style="float:right"><a class="active" href="/login">Log-in</a></li>
-                <li style="float:right"><a class="active" href="/about">About</a></li>
-                <li style="float:right"><a class="active" href="/contact">Contact</a></li>
-                <li style="float:right"><a class="active" href="/booking">Book Now</a></li>
-            </ul>
-        </nav>
+  <ul>
+    <li><a class="active" href="/"><img src="{{ url_for('static', filename='images/ericsson text logo.png')}}" alt="Logo" class="logo"></a></li>
+    <li style="float:right"><a class="active" href="/signup">Sign-up</a></li>
+    <li style="float:right"><a class="active" href="/login">Log-in</a></li>
+    <li style="float:right"><a class="active" href="/about">About</a></li>
+    <li style="float:right"><a class="active" href="/contact">Contact</a></li>
+    <li style="float:right"><a class="active" href="/booking">Book Now</a></li>
+  </ul>
+</nav>
         <div class="welcome-container">
             <h1>Welcome</h1>
-            <button><a href="booking.html">Book Now</a></button>
+            <button><a href="/booking">Book Now</a></button>
         </div>
         <div class="content-container">
             <h1>EPark</h1>
@@ -30,17 +30,17 @@
                 </p>
             <div class="slideshow-container">
                 <div class="mySlides fade">
-                    <img src="{{url_for('static', filename='images/img5.jpg')}}" style="width:100%; height: 100%;">
+                    <img src="{{url_for('static', filename='images/img5Crop.jpg')}}" style="width:100%; height: 100%;">
                     <div class="text"></div>
                 </div>
 
                 <div class="mySlides fade">
-                    <img src="{{url_for('static', filename='images/img6.jpg')}}" style="width:100%; height: 100%;">
+                    <img src="{{url_for('static', filename='images/img6Crop.jpg')}}" style="width:100%; height: 100%;">
                     <div class="text"></div>
                 </div>
 
                 <div class="mySlides fade">
-                    <img src="{{url_for('static', filename='images/img7.jpg')}}" style="width:100%; height: 100%;">
+                    <img src="{{url_for('static', filename='images/img7Crop.jpg')}}" style="width:100%; height: 100%;">
                     <div class="text"></div>
                 </div>
             </div>
@@ -73,5 +73,14 @@
           setTimeout(showSlides, 2000); // Change image every 2 seconds
         }
         </script>
+        <div class="footer">
+        <p>&copy; 2024 EPark. All rights reserved.</p>
+        <p>
+            <a href="/tandc">Terms and Conditions</a>
+            <a href="/about">About Us</a>
+            <a href="/contact">Contact Us</a>
+        </p>
+    </div>
+
     </body>
 </html>

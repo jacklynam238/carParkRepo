@@ -43,6 +43,10 @@ def about():
 def contact():
     return render_template('contact.html')
 
+@app.route('/tandc')
+def tandc():
+    return render_template('tandc.html')
+
 @app.route('/submit_booking', methods=['POST'])
 def submit_booking():
     if request.method == 'POST':

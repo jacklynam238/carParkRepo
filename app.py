@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
+import requests
+from requests.structures import CaseInsensitiveDict
 
 USERNAME = 'root'
 PASSWORD = ''
@@ -30,7 +32,6 @@ class Account(db.Model):
 
 @app.route('/')
 def index():
-    print(session['userId'])
     return render_template('index.html', userId=session['userId'])
 
 @app.route('/booking')
@@ -56,6 +57,10 @@ def contact():
 @app.route('/tandc')
 def tandc():
     return render_template('tandc.html', userId=session['userId'])
+
+@app.route('/thankyou')
+def thankyou():
+    return render_template('thankyou.html')
 
 @app.route('/submit_booking', methods=['POST'])
 def submit_booking():
@@ -88,13 +93,16 @@ def submit_signup():
         for account in Account.query.all():
             if account.email == email:
                 return render_template('signup.html')
+        if isEmailValid(email) == False:
+            return render_template('signup.html')
 
         #Upload
         newAccount = Account(fullname=name, email=email, password=password)
-        session['userId'] = newAccount.id
         db.session.add(newAccount)
         db.session.commit()
-        return redirect('/') #Thank you page
+
+        session['userId'] = newAccount.id
+        return redirect('/thankyou')
     return render_template('signup.html')
 
 @app.route('/submit_login', methods=['POST'])
@@ -103,9 +111,12 @@ def submit_login():
         #Form
         email = request.form['email']
         password = request.form['password']
-        userAccount = Account.query.filter_by(email=email).first()
 
         #Errors
+        for account in Account.query.all():
+            if account.email == email:
+                return render_template('login.html')
+        userAccount = Account.query.filter_by(email=email).first()
         if userAccount.password != password:
             return render_template('login.html')
 
@@ -117,3 +128,21 @@ def submit_login():
 def logout():
     session['userId'] = 0
     return redirect('/')
+
+def isEmailValid(email: str):
+    url = f"https://api.emailvalidation.io/v1/info?email={email}"
+
+    headers = CaseInsensitiveDict()
+    headers["apikey"] = "ema_live_P6RRHsE3sEG3UwOfpRChHWtXi940bghNaqJCZhpg"
+
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        json_resp = response.json()
+        format_valid = json_resp["format_valid"]
+        mx_found = json_resp["mx_found"]
+        smtp_check = json_resp["smtp_check"]
+        state = json_resp["state"]
+
+        return format_valid and mx_found and smtp_check and state == "deliverable"
+
+    return False

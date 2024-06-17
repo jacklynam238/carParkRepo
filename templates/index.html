@@ -1,44 +1,46 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-      <link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
     </head>
+
     <body class="background-tint">
         <nav>
-  <ul id="navigation">
+            <ul id="navigation"></ul>
+        </nav>
 
-  </ul>
-</nav>
         <div class="welcome-container">
             <h1>Welcome</h1>
             <button><a href="/booking">Book Now</a></button>
         </div>
+
         <div class="content-container">
             <h1>EPark</h1>
-            <p>At ePark, located within the Ericsson premises,
+            <p>
+                At ePark, located within the Ericsson premises,
                 we provide an efficient and easy-to-use car charging station exclusively for our
                 employees and visitors. Our goal is to support your commitment to sustainable transportation
                 by offering a reliable and seamless charging experience right where you work.<br><br> By using ePark, you're
                 joining a community of eco-conscious individuals dedicated to promoting sustainable practices. Enjoy the convenience
                 of on-site charging and contribute to a greener future. <br><br>Thank you for choosing ePark at Ericsson. Your journey to sustainable transportation starts here.
-                </p>
+            </p>
+
             <div class="slideshow-container">
                 <div class="mySlides fade">
                     <img src="{{url_for('static', filename='images/img5Crop.jpg')}}" style="width:100%; height: 100%;">
                     <div class="text"></div>
                 </div>
-
                 <div class="mySlides fade">
                     <img src="{{url_for('static', filename='images/img6Crop.jpg')}}" style="width:100%; height: 100%;">
                     <div class="text"></div>
                 </div>
-
                 <div class="mySlides fade">
                     <img src="{{url_for('static', filename='images/img7Crop.jpg')}}" style="width:100%; height: 100%;">
                     <div class="text"></div>
                 </div>
             </div>
+
             <br>
 
             <div style="text-align:center">
@@ -49,13 +51,13 @@
         </div>
 
         <div class="footer">
-        <p>&copy; 2024 EPark. All rights reserved.</p>
-        <p>
-            <a href="/tandc">Terms and Conditions</a>
-            <a href="/about">About Us</a>
-            <a href="/contact">Contact Us</a>
-        </p>
-    </div>
+            <p>&copy; 2024 EPark. All rights reserved.</p>
+            <p>
+                <a href="/tandc">Terms and Conditions</a>
+                <a href="/about">About Us</a>
+                <a href="/contact">Contact Us</a>
+            </p>
+        </div>
 
         <script type="text/javascript"> let userId = {{userId}} </script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/navigation.js') }}"></script>

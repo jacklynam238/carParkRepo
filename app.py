@@ -117,10 +117,15 @@ def submit_login():
         password = request.form['password']
 
         #Errors
+        #Is email registered
+        validEmail = False
         for account in Account.query.all():
             if account.email == email:
-                return render_template('login.html')
+                validEmail = True
+        if not validEmail:
+            return render_template('login.html')
         userAccount = Account.query.filter_by(email=email).first()
+        #Is password correct
         if userAccount.password != password:
             return render_template('login.html')
 

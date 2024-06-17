@@ -21,7 +21,7 @@ function userLoggedOut() {
 function userLoggedIn() {
     let insertHTML = `
         <li><a class="active" href="/"><img src="../static/images/ericsson text logo.png" alt="Logo" class="logo"></a></li>
-        <li style="float:right"><a class="active" href="/logout">Log-out</a></li>
+        <li style="float:right"><a class="active" href="/account">My Account</a></li>
         <li style="float:right"><a class="active" href="/about">About</a></li>
         <li style="float:right"><a class="active" href="/contact">Contact</a></li>
         <li style="float:right"><a class="active" href="/booking">Book Now</a></li>

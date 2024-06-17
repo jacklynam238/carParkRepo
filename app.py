@@ -32,6 +32,8 @@ class Account(db.Model):
 
 @app.route('/')
 def index():
+    if not session.get('userId'):
+        session['userId'] = 0
     return render_template('index.html', userId=session['userId'])
 
 @app.route('/booking')

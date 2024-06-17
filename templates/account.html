@@ -1,34 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Page</title>
-     <link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/acount.css') }}">
-</head>
-<body>
- <nav>
-     <ul id="navigation"></ul>
- </nav>
-    <div class="container">
-        <header>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Account Page</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/account.css') }}">
+    </head>
+    <body>
+        <nav>
+            <ul id="navigation"></ul>
+        </nav>
+
+        <div class="content-container">
             <h1>Account Page</h1>
-        </header>
-        <section class="user-info">
-            <h2>User Information</h2>
-            <div class="info">
-                <label for="username">Full name:</label>
-                <span id="username">john_doe</span>
+            <div class="user-info">
+                <h2>User Information</h2>
+                <div class="row">
+                    <label for="username">Full name:</label>
+                    <p style="margin-left: auto;" id="username">john_doe</p>
+                </div>
+                <div class="row">
+                    <label for="email">Email:</label>
+                    <p style="margin-left: auto;" id="email">john_doe@example.com</p>
+                </div>
+                <div class="row">
+                    <label for="email">Password:</label>
+                    <button style="margin-left: auto;" type="submit">Update Password</button>
+                </div>
             </div>
-            <div class="info">
-                <label for="email">Email:</label>
-                <span id="email">john_doe@example.com</span>
+
+            <div class="booking-container">
+                <div class="booking">
+
+
+                </div>
             </div>
-                <div class="info">
-                <label for="email">Password:</label>
-                <button type="submit">Update Password</button>
-            </div>
-            </form>
-</body>
+
+            <button id="logout">Logout</button>
+        </div>
+
+        <script type="text/javascript"> let userId = {{userId}} </script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/navigation.js') }}"></script>
+    </body>
 </html>

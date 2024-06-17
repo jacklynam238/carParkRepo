@@ -63,7 +63,7 @@
         seats.forEach(seat => {
             seat.addEventListener('click', () => {
                 seats.forEach(s => s.classList.remove('selected'));
-                seat.classList.add('selected');
+                spot.classList.add('selected');
                 selectedSpotDisplay.textContent = `Selected Spot: ${seat.dataset.seat}`;
             });
         });

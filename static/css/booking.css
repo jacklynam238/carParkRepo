@@ -1,3 +1,6 @@
+body {
+    background-image: url("../images/turbine12crop.jpg");
+
 .welcome-container {
     display: flex;
     align-items: center;

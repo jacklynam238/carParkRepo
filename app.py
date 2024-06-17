@@ -58,6 +58,10 @@ def contact():
 def tandc():
     return render_template('tandc.html', userId=session['userId'])
 
+@app.route('/account')
+def account():
+    return render_template('account.html')
+
 @app.route('/thankyou')
 def thankyou():
     return render_template('thankyou.html')

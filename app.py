@@ -67,7 +67,7 @@ def submit_booking():
         datetime = date + " " + time + ":00"
 
         #Upload
-        newBooking = Booking(startTime=datetime, parkLength=length, parkSpot=0, accountID=1)
+        newBooking = Booking(startTime=datetime, parkLength=length, parkSpot=0, accountID=session['userId'])
         db.session.add(newBooking)
         db.session.commit()
         return render_template('index.html') #Thank you page

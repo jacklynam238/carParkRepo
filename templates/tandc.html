@@ -6,13 +6,7 @@
     </head>
 <body class="background-tint">
 <nav>
-  <ul>
-    <li><a class="active" href="/"><img src="{{ url_for('static', filename='images/ericsson text logo.png')}}" alt="Logo" class="logo"></a></li>
-    <li style="float:right"><a class="active" href="/signup">Sign-up</a></li>
-    <li style="float:right"><a class="active" href="/login">Log-in</a></li>
-    <li style="float:right"><a class="active" href="/about">About</a></li>
-    <li style="float:right"><a class="active" href="/contact">Contact</a></li>
-    <li style="float:right"><a class="active" href="/booking">Book Now</a></li>
+  <ul id="navigation">
   </ul>
 </nav>
 
@@ -55,5 +49,7 @@
             <a href="/contact">Contact Us</a>
         </p>
     </div>
+    <script type="text/javascript"> let userId = {{userId}} </script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/navigation.js') }}"></script>
 </body>
 </html>

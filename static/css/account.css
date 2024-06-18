@@ -1,5 +1,6 @@
 body {
-    background-color: white;
+    background: white;
+    height: 100%;
 }
 
 .content-container {
@@ -57,9 +58,14 @@ button:hover {
     background-color: #4784e;
 }
 
-#logout {
+#delete, #logout {
     margin-top: 30px;
     width: 130px;
-    margin-left: auto;
     font-size: 1em;
 }
+
+#logout a, #delete a {
+    color: white;
+    text-decoration: none;
+}
+

@@ -31,16 +31,19 @@
             </div>
 
             <div class="booking-container">
+                <h2>Bookings</h2>
                 <div class="booking">
-
-
+                    <label>Booking 1</label>
                 </div>
             </div>
 
-            <button id="logout">Logout</button>
+            <div class="row">
+                <button style="margin-left: auto;" id="delete"><a href="/logout">Delete</a></button>
+                <button style="margin-left: 20px;" id="logout"><a href="/logout">Logout</a></button>
+            </div>
         </div>
 
         <script type="text/javascript"> let userId = {{userId}} </script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/navigation.js') }}"></script>
-    </body>
+    </body>\
 </html>

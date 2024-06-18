@@ -68,6 +68,10 @@ def account():
 def thankyou():
     return render_template('thankyou.html')
 
+@app.route('/afterbooking')
+def afterbooking():
+    return render_template('afterbooking.html')
+
 @app.route('/submit_booking', methods=['POST'])
 def submit_booking():
     if request.method == 'POST':

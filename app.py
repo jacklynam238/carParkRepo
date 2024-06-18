@@ -62,7 +62,7 @@ def tandc():
 
 @app.route('/account')
 def account():
-    return render_template('account.html')
+    return render_template('account.html', userId=session['userId'])
 
 @app.route('/thankyou')
 def thankyou():

@@ -20,7 +20,7 @@ body {
     font-size: 3em;
 }
 
-.user-info {
+.user-info{
     width: 94%;
     border: 2px solid black;
     padding: 2% 3%;
@@ -69,3 +69,11 @@ button:hover {
     text-decoration: none;
 }
 
+.booking {
+    display: flex;
+    flex-flow: column;
+    background-color: #EEE;
+    border-radius: 10px;
+    padding: 10px 25px;
+    margin-bottom: 20px;
+}

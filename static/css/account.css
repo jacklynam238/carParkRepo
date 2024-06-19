@@ -59,17 +59,18 @@ button:hover {
     background-color: #4784e;
 }
 
-#delete, #logout {
+.delete, #logout {
     margin-top: 30px;
-    width: 130px;
+    width: 190px;
     font-size: 1em;
+    margin-bottom: 15px;
 }
 
-#delete {
+.delete {
     background-color: #f06060;
 }
 
-#logout a, #delete a {
+#logout a, .delete a {
     color: white;
     text-decoration: none;
 }

@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
-import requests
+import requests, datetime
 from requests.structures import CaseInsensitiveDict
 
 USERNAME = 'root'
@@ -19,9 +19,11 @@ class Booking(db.Model):
     __tablename__ = 'booking_table'
     id = db.Column(db.Integer, primary_key=True)
     startTime = db.Column(db.DateTime())
-    parkLength = db.Column(db.Integer())
+    endTime = db.Column(db.DateTime())
     parkSpot = db.Column(db.Integer())
     accountID = db.Column(db.Integer())
+
+    time = str(startTime)[11:]
 
 class Account(db.Model):
     __tablename__ = 'account_table'
@@ -62,30 +64,47 @@ def tandc():
 
 @app.route('/account')
 def account():
-    return render_template('account.html', userId=session['userId'])
+    userAccount = Account.query.filter_by(id=session['userId']).first()
+    userName = userAccount.fullname
+    userEmail = userAccount.email
+    data = [userName, userEmail]
+
+    bookings = Booking.query.filter_by(accountID=session['userId'])
+    bookingData = []
+    for index in range(len(list(bookings))):
+        booking = bookings[index]
+        bookingDataElement = [0, 0, 0, 0, 0, 0]
+
+        bookingDataElement[0] = index + 1
+        bookingDataElement[1] = str(booking.startTime)[:10]
+        bookingDataElement[2] = str(booking.startTime)[11:]
+        bookingDataElement[3] = str(booking.endTime)[11:]
+        bookingDataElement[4] = booking.parkSpot
+        bookingDataElement[5] = booking.id
+
+        bookingData.append(bookingDataElement)
+
+    return render_template('account.html', userId=session['userId'], data=data, bookingData=bookingData)
 
 @app.route('/thankyou')
 def thankyou():
     return render_template('thankyou.html')
-
-@app.route('/afterbooking')
-def afterbooking():
-    return render_template('afterbooking.html')
 
 @app.route('/submit_booking', methods=['POST'])
 def submit_booking():
     if request.method == 'POST':
         #Form
         date = request.form['date']
-        time = request.form['time']
-        length = request.form['length']
-        datetime = date + " " + time + ":00"
+        startTime = request.form['time']
+        endTime = request.form['endTime']
+        startDatetime = date + " " + startTime + ":00"
+        endDateTime = date + " " + endTime + ":00"
 
         #Upload
-        newBooking = Booking(startTime=datetime, parkLength=length, parkSpot=0, accountID=session['userId'])
+        newBooking = Booking(startTime=startDatetime, endTime=endDateTime, parkSpot=0, accountID=session['userId'])
         db.session.add(newBooking)
         db.session.commit()
-        return render_template('index.html') #Thank you page
+        return redirect('/') #Thank you page
     return render_template('booking.html')
 
 @app.route('/submit_signup', methods=['POST'])
@@ -141,6 +160,21 @@ def submit_login():
 
 @app.route('/logout')
 def logout():
+    session['userId'] = 0
+    return redirect('/')
+
+@app.route('/deleteBooking/<bookingId>')
+def deleteBooking(bookingId):
+    booking = Booking.query.filter_by(id=bookingId).first()
+    db.session.delete(booking)
+    db.session.commit()
+    return redirect('/account')
+
+@app.route('/deleteAccount')
+def deleteAccount():
+    user = Account.query.filter_by(id=session['userId']).first()
+    db.session.delete(user)
+    db.session.commit()
     session['userId'] = 0
     return redirect('/')
 

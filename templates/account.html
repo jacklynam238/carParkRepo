@@ -18,11 +18,11 @@
                 <h2>User Information</h2>
                 <div class="row">
                     <label for="username">Full name:</label>
-                    <p style="margin-left: auto;" id="username">john_doe</p>
+                    <p style="margin-left: auto;" id="username">{{ data[0] }}</p>
                 </div>
                 <div class="row">
                     <label for="email">Email:</label>
-                    <p style="margin-left: auto;" id="email">john_doe@example.com</p>
+                    <p style="margin-left: auto;" id="email">{{ data[1] }}</p>
                 </div>
                 <div class="row">
                     <label for="email">Password:</label>
@@ -32,40 +32,28 @@
 
             <div style="margin-top: 20px;" class="booking-container">
                 <h2>Bookings</h2>
+                {% for booking in bookingData %}
                 <div class="booking">
-                    <h2>Booking 1</h2>
+                    <h2>Booking {{ booking[0]  }}</h2>
                     <div class="row">
                         <label>Date:</label>
-                        <p style="margin-left: auto;">12-32-12</p>
+                        <p style="margin-left: auto;">{{ booking[1] }}</p>
                     </div>
                     <div class="row">
                         <label>Start/End Times:</label>
-                        <p style="margin-left: auto;">14:22 until 15:33</p>
+                        <p style="margin-left: auto;">{{ booking[2] }} until {{ booking[3] }}</p>
                     </div>
                     <div class="row">
                         <label>Parking Spot:</label>
-                        <p style="margin-left: auto;">1</p>
+                        <p style="margin-left: auto;">{{ booking[4] }}</p>
                     </div>
+                    <button style="margin-left: auto;" class="delete"><a href="/deleteBooking/{{ booking[5] }}">Delete Booking</a></button>
                 </div>
-                <div class="booking">
-                    <h2>Booking 2</h2>
-                    <div class="row">
-                        <label>Date:</label>
-                        <p style="margin-left: auto;">12-32-12</p>
-                    </div>
-                    <div class="row">
-                        <label>Start/End Times:</label>
-                        <p style="margin-left: auto;">14:22 until 15:33</p>
-                    </div>
-                    <div class="row">
-                        <label>Parking Spot:</label>
-                        <p style="margin-left: auto;">1</p>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
 
             <div class="row">
-                <button style="margin-left: auto;" id="delete"><a href="/logout">Delete</a></button>
+                <button style="margin-left: auto;" class="delete"><a href="/deleteAccount">Delete Account</a></button>
                 <button style="margin-left: 20px;" id="logout"><a href="/logout">Logout</a></button>
             </div>
         </div>

@@ -97,15 +97,22 @@ def submit_booking():
         date = request.form['date']
         startTime = request.form['time']
         endTime = request.form['endTime']
+        parkSpot = int(request.form['parkSpot'])
         startDatetime = date + " " + startTime + ":00"
         endDateTime = date + " " + endTime + ":00"
 
+        #Errors
+        if(parkSpot == 0):
+            return redirect('/booking')
+        if(session['userId'] == 0):
+            return redirect('/booking')
+
         #Upload
-        newBooking = Booking(startTime=startDatetime, endTime=endDateTime, parkSpot=0, accountID=session['userId'])
+        newBooking = Booking(startTime=startDatetime, endTime=endDateTime, parkSpot=parkSpot, accountID=session['userId'])
         db.session.add(newBooking)
         db.session.commit()
         return redirect('/') #Thank you page
-    return render_template('booking.html')
+    return redirect('/booking')
 
 @app.route('/submit_signup', methods=['POST'])
 def submit_signup():

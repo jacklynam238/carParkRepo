@@ -99,12 +99,12 @@ def submit_signup():
 
         #Errors
         if confirmPassword != password:
-            return render_template('signup.html')
+            return render_template('signup.html', error=1)
         for account in Account.query.all():
             if account.email == email:
-                return render_template('signup.html')
+                return render_template('signup.html', error=2)
         if isEmailValid(email) == False:
-            return render_template('signup.html')
+            return render_template('signup.html', error=3)
 
         #Upload
         newAccount = Account(fullname=name, email=email, password=password)
@@ -113,7 +113,7 @@ def submit_signup():
 
         session['userId'] = newAccount.id
         return redirect('/thankyou')
-    return render_template('signup.html')
+    return render_template('signup.html', error=4)
 
 @app.route('/submit_login', methods=['POST'])
 def submit_login():
@@ -129,15 +129,15 @@ def submit_login():
             if account.email == email:
                 validEmail = True
         if not validEmail:
-            return render_template('login.html')
+            return render_template('login.html', error=1)
         userAccount = Account.query.filter_by(email=email).first()
         #Is password correct
         if userAccount.password != password:
-            return render_template('login.html')
+            return render_template('login.html', error=2)
 
         session['userId'] = userAccount.id
         return redirect('/')
-    return render_template('login.html')
+    return render_template('login.html', error=3)
 
 @app.route('/logout')
 def logout():

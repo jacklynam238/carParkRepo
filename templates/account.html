@@ -37,17 +37,18 @@
                     <h2>Booking {{ booking[0]  }}</h2>
                     <div class="row">
                         <label>Date:</label>
-                        <p style="margin-left: auto;">{{ booking[1] }}</p>
+                        <p style="margin-left: auto;" class="date">{{ booking[1] }}</p>
                     </div>
                     <div class="row">
                         <label>Start/End Times:</label>
-                        <p style="margin-left: auto;">{{ booking[2] }} until {{ booking[3] }}</p>
+                        <p style="margin-left: auto;" class="times">{{ booking[2] }} until {{ booking[3] }}</p>
                     </div>
                     <div class="row">
                         <label>Parking Spot:</label>
-                        <p style="margin-left: auto;">{{ booking[4] }}</p>
+                        <p style="margin-left: auto;" class="spot">{{ booking[4] }}</p>
                     </div>
                     <button style="margin-left: auto;" class="delete"><a href="/deleteBooking/{{ booking[5] }}">Delete Booking</a></button>
+                    <button style="margin-left: auto;" onClick="updateBooking({{ booking[0] }})">Update Booking</button>
                 </div>
                 {% endfor %}
             </div>
@@ -60,5 +61,6 @@
 
         <script type="text/javascript"> let userId = {{userId}} </script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/navigation.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/account.js') }}"></script>
     </body>\
 </html>

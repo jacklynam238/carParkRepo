@@ -131,6 +131,19 @@ def submit_signup():
                 return render_template('signup.html', error=2)
         if isEmailValid(email) == False:
             return render_template('signup.html', error=3)
+        if len(password) < 10:
+            return render_template('signup.html', error=4)
+        passHasUpper = False
+        passHasNum = True
+        for char in password:
+            if char.isupper():
+                passHasUpper = True
+            if char.isdigit():
+                passHasUpper = True
+        if not passHasUpper:
+            return render_template('signup.html', error=5)
+        if not passHasNum:
+            return render_template('signup.html', error=6)
 
         #Upload
         newAccount = Account(fullname=name, email=email, password=password)

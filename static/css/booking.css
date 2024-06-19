@@ -63,9 +63,9 @@ button {
     padding: 10px 20px;
     background-color: #1174e6;
     border: none;
-    border-radius: 4px;
+    border-radius: 7px;
     cursor: pointer;
-    align: center;
+    align; center;
 }
 
 button:hover {

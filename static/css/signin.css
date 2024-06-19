@@ -42,6 +42,7 @@ input {
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
+
     border: 1px solid #ccc;
     border-radius: 4px;
 }
@@ -57,4 +58,19 @@ button {
 
 button:hover {
     background-color: #4784e;
+}
+
+.error {
+    background-color: #fad22d;
+    padding: 20px;
+    padding-bottom: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.error h2, .error p {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 10px;
+    text-align: left;
 }

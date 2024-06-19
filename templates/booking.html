@@ -3,6 +3,39 @@
     <head>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/booking.css') }}">
+        <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        .seats {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .seat {
+            width: 50px;
+            height: 50px;
+            background-color: #ccc;
+            margin: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .seat.selected {
+            background-color: #6c6;
+        }
+    </style>
     </head>
     <body class="background-tint">
         <nav>
@@ -30,9 +63,26 @@
                     <label for="length">Park Length</label>
                      <input type="number" id="length" name="length" required>
                 </div>
-                <button type="submit">Book Now</button>
             </form>
+
+            <div class="container">
+                <h1>Select Your Spot</h1>
+                <div class="seats">
+                    <div class="seat" data-seat="1">1</div>
+                    <div class="seat" data-seat="2">2</div>
+                    <div class="seat" data-seat="3">3</div>
+                    <div class="seat" data-seat="4">4</div>
+                    <div class="seat" data-seat="5">5</div>
+                    <div class="seat" data-seat="6">6</div>
+                    <div class="seat" data-seat="7">7</div>
+                </div>
+                <div id="selectedSpot" style="margin-top: 20px;"></div>
+            </div>
         </div>
+
+        <form>
+            <button type="submit">Book Now</button>
+        </form>
 
         <div class="footer">
             <p>&copy; 2024 EPark. All rights reserved.</p>
@@ -45,5 +95,17 @@
 
         <script type="text/javascript"> let userId = {{userId}} </script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/navigation.js') }}"></script>
+    <script>
+        const seats = document.querySelectorAll('.seat');
+        const selectedSpotDisplay = document.getElementById('selectedSpot');
+
+        seats.forEach(seat => {
+            seat.addEventListener('click', () => {
+                seats.forEach(s => s.classList.remove('selected'));
+                seat.classList.add('selected');
+                selectedSpotDisplay.textContent = `Selected Spot: ${seat.dataset.seat}`;
+            });
+        });
+    </script>
     </body>
 </html>

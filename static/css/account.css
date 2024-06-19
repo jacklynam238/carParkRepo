@@ -25,6 +25,7 @@ body {
     border: 2px solid black;
     padding: 2% 3%;
     background: #EEE;
+    border-radius: 15px;
 }
 
 .row {
@@ -62,6 +63,10 @@ button:hover {
     margin-top: 30px;
     width: 130px;
     font-size: 1em;
+}
+
+#delete {
+    background-color: #f06060;
 }
 
 #logout a, #delete a {

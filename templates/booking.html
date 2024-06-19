@@ -33,7 +33,7 @@
             transition: background-color 0.3s;
         }
         .seat.selected {
-            background-color: #6c6;
+            background-color: #1174e6;
         }
     </style>
     </head>
@@ -74,8 +74,8 @@
                         <div class="seat" data-seat="6">6</div>
                         <div class="seat" data-seat="7">7</div>
                     </div>
+                    <input type="hidden" id="parkSpot" name="parkSpot" value="0">
                 </div>
-                <div id="selectedSpot" style="margin-top: 20px;"></div>
                 <button type="submit">Book Now</button>
             </form>
         </div>
@@ -93,12 +93,13 @@
     <script>
         const seats = document.querySelectorAll('.seat');
         const selectedSpotDisplay = document.getElementById('selectedSpot');
+        const input = document.getElementById('parkSpot');
 
         seats.forEach(seat => {
             seat.addEventListener('click', () => {
                 seats.forEach(s => s.classList.remove('selected'));
                 seat.classList.add('selected');
-                selectedSpotDisplay.textContent = `Selected Spot: ${seat.dataset.seat}`;
+                input.value = seat.dataset.seat;
             });
         });
     </script>

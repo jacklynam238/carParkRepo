@@ -65,6 +65,7 @@ button {
     border: none;
     border-radius: 10px;
     cursor: pointer;
+<<<<<<< HEAD
     align; center;
     color: white;
     margin-left: auto;
@@ -72,6 +73,9 @@ button {
     display: block;
     margin-top: 40px;
     font-size: 1.1em;
+=======
+    align-items; center;
+>>>>>>> 6a6493a (.)
 }
 
 button:hover {

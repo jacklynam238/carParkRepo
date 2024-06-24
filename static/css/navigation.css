@@ -60,19 +60,19 @@ li a img {
 }
 
 .footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-            bottom: 0;
-            width: 100%;
-            font-family: 'Ericsson';
-        }
-        .footer a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 10px;
-        }
-        .footer a:hover {
-            text-decoration: underline;
-        }
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    bottom: 0;
+    width: 100%;
+    font-family: 'Ericsson';
+}
+.footer a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+.footer a:hover {
+    text-decoration: underline;
+}

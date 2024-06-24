@@ -40,10 +40,6 @@ def index():
         session['userId'] = 0
     return render_template('index.html', userId=session['userId'])
 
-@app.route('/booking')
-def booking():
-    return render_template('booking.html', userId=session['userId'], error=0)
-
 @app.route('/booking/<error>')
 def bookingError(error):
     return render_template('booking.html', userId=session['userId'], error=error)
@@ -68,17 +64,18 @@ def contact():
 def tandc():
     return render_template('tandc.html', userId=session['userId'])
 
-@app.route('/account')
-def account():
+@app.route('/account/<error>')
+def account(error):
     userAccount = Account.query.filter_by(id=session['userId']).first()
     userName = userAccount.fullname
     userEmail = userAccount.email
     data = [userName, userEmail]
-
+    
     bookings = Booking.query.filter_by(accountID=session['userId'])
+    futureBookings = bookings.filter(Booking.date >= datetime.today())
     bookingData = []
-    for index in range(len(list(bookings))):
-        booking = bookings[index]
+    for index in range(len(list(futureBookings))):
+        booking = futureBookings[index]
         bookingDataElement = [0, 0, 0, 0, 0, 0]
 
         bookingDataElement[0] = index + 1
@@ -90,7 +87,7 @@ def account():
 
         bookingData.append(bookingDataElement)
 
-    return render_template('account.html', userId=session['userId'], data=data, bookingData=bookingData)
+    return render_template('account.html', userId=session['userId'], data=data, bookingData=bookingData, error=error)
 
 @app.route('/thankyou')
 def thankyou():
@@ -135,7 +132,7 @@ def submit_booking():
         db.session.add(newBooking)
         db.session.commit()
         return redirect('/') #Thank you page
-    return redirect('/booking')
+    return redirect('/booking/0')
 
 @app.route('/submit_signup', methods=['POST'])
 def submit_signup():
@@ -157,12 +154,12 @@ def submit_signup():
         if len(password) < 10:
             return render_template('signup.html', error=4)
         passHasUpper = False
-        passHasNum = True
+        passHasNum = False
         for char in password:
             if char.isupper():
                 passHasUpper = True
             if char.isdigit():
-                passHasUpper = True
+                passHasNum = True
         if not passHasUpper:
             return render_template('signup.html', error=5)
         if not passHasNum:
@@ -211,7 +208,7 @@ def deleteBooking(bookingId):
     booking = Booking.query.filter_by(id=bookingId).first()
     db.session.delete(booking)
     db.session.commit()
-    return redirect('/account')
+    return redirect('/account/0')
 
 @app.route('/deleteAccount')
 def deleteAccount():
@@ -225,22 +222,35 @@ def deleteAccount():
 def updateBooking():
     bookingId = request.form['bookingId']
     date = request.form['date']
-    startTime = request.form['startTime']
-    endTime = request.form['endTime']
+    startTime = request.form['startTime'] + ":00"
+    endTime = request.form['endTime'] + ":00"
     spot = int(request.form['spot'])
 
-    print(startTime)
-    print(endTime)
+    if not validateDateInput(date) or not validateTimeInput(startTime) or not validateTimeInput(endTime) or request.form['spot'] == "" or request.form['spot'] == None:
+        return redirect('/account/1')
 
-    startTime += ":00"
-    endTime += ":00"
+    convertedStartTime = datetime.strptime(startTime, "%H:%M:%S")
+    convertedDate = datetime.strptime(date, "%Y-%m-%d")
+    convertedEndTime = datetime.strptime(endTime, "%H:%M:%S")
+    openingTime = datetime.strptime("07:00:00", "%H:%M:%S")
+    closingTime = datetime.strptime("19:00:00", "%H:%M:%S")
 
-    if datetime.strptime(startTime, "%H:%M:%S") < datetime.strptime("08:00:00", "%H:%M:%S"):
-        print("ERROR")
-    if datetime.strptime(endTime, "%H:%M:%S") > datetime.strptime("19:00:00", "%H:%M:%S"):
-        print("ERROR")
-    if spot > 8 or spot < 1:
-        print('ERROR')
+    if (convertedStartTime < openingTime or convertedStartTime > closingTime):
+        return redirect('/account/2')
+    if (convertedEndTime < openingTime or convertedEndTime > closingTime):
+        return redirect('/account/3')
+    if (convertedEndTime <= convertedStartTime):
+        return redirect('/account/4')
+    if (convertedEndTime - convertedStartTime > timedelta(hours=3)):
+        return redirect('/account/5')
+    if (convertedEndTime - convertedStartTime < timedelta(minutes=30)):
+        return redirect('/account/6')
+    if (convertedDate < datetime.now()):
+        if (convertedStartTime <= datetime.now()):
+            return redirect('/account/7')
+    clashedBookings = getClashedBookings(date, convertedStartTime, convertedEndTime)
+    if spot in list(clashedBookings):
+        return redirect('/account/8')
 
     booking = Booking.query.filter_by(id=bookingId).first()
 
@@ -251,7 +261,7 @@ def updateBooking():
 
     db.session.commit()
 
-    return redirect('/account')
+    return redirect('/account/0')
 
 @app.route('/jsGet', methods=['POST'])
 def jsGet():
@@ -259,21 +269,7 @@ def jsGet():
     startTime = datetime.strptime(str(request.form['startTime']) + ":00", "%H:%M:%S")
     endTime = datetime.strptime(str(request.form['endTime']) + ":00", "%H:%M:%S")
 
-    sameDateBookings = Booking.query.filter_by(date=date)
-    clashedBookings = []
-    for booking in sameDateBookings:
-
-        bookingStartTime = datetime.strptime(str(booking.startTime), "%H:%M:%S")
-        bookingEndTime = datetime.strptime(str(booking.endTime), "%H:%M:%S")
-
-        if (bookingStartTime <= endTime) and (bookingEndTime >= endTime):
-            clashedBookings.append(booking.parkSpot)
-        if (bookingEndTime >= startTime) and (bookingStartTime <= startTime):
-            clashedBookings.append(booking.parkSpot)
-        if (bookingStartTime <= startTime) and (bookingEndTime >= endTime):
-            clashedBookings.append(booking.parkSpot)
-        if (bookingStartTime >= startTime) and (bookingEndTime <= endTime):
-            clashedBookings.append(booking.parkSpot)
+    clashedBookings = getClashedBookings(date, startTime, endTime)
 
     return jsonify(clashedBookings)
 
@@ -295,3 +291,36 @@ def isEmailValid(email: str):
         return format_valid and mx_found and smtp_check and state == "deliverable"
 
     return False
+
+def validateTimeInput(input):
+    try:
+        datetime.strptime(input, "%H:%M:%S")
+        return True
+    except ValueError:
+        return False
+
+def validateDateInput(input):
+    try:
+        datetime.strptime(input, "%Y-%m-%d")
+        return True
+    except ValueError:
+        raise ValueError("Incorrect data format, should be YYYY-MM-DD")
+
+def getClashedBookings(date, startTime, endTime):
+    sameDateBookings = Booking.query.filter_by(date=date)
+    clashedBookings = []
+    for booking in sameDateBookings:
+
+        bookingStartTime = datetime.strptime(str(booking.startTime), "%H:%M:%S")
+        bookingEndTime = datetime.strptime(str(booking.endTime), "%H:%M:%S")
+
+        if (bookingStartTime <= endTime) and (bookingEndTime >= endTime):
+            clashedBookings.append(booking.parkSpot)
+        if (bookingEndTime >= startTime) and (bookingStartTime <= startTime):
+            clashedBookings.append(booking.parkSpot)
+        if (bookingStartTime <= startTime) and (bookingEndTime >= endTime):
+            clashedBookings.append(booking.parkSpot)
+        if (bookingStartTime >= startTime) and (bookingEndTime <= endTime):
+            clashedBookings.append(booking.parkSpot)
+
+    return clashedBookings

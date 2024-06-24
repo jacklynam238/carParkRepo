@@ -4,43 +4,43 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/booking.css') }}">
         <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            height: 100vh;
-            margin: 0;
-        }
-        .container {
-            text-align: center;
-        }
-        h1 {
-            color: #333;
-        }
-        .seats {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .seat {
-            width: 50px;
-            height: 50px;
-            background-color: #ccc;
-            margin: 5px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .seat.selected {
-            background-color: #1174e6;
-            color: white;
-        }
-        .seat.unavailable {
-            background-color: red;
-            color: white;
-        }
-    </style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f9f9f9;
+                height: 100vh;
+                margin: 0;
+            }
+            .container {
+                text-align: center;
+            }
+            h1 {
+                color: #333;
+            }
+            .seats {
+                display: flex;
+                justify-content: center;
+                margin-top: 20px;
+            }
+            .seat {
+                width: 50px;
+                height: 50px;
+                background-color: #ccc;
+                margin: 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+            .seat.selected {
+                background-color: #1174e6;
+                color: white;
+            }
+            .seat.unavailable {
+                background-color: red;
+                color: white;
+            }
+        </style>
     </head>
     <body class="background-tint">
         <nav>
@@ -54,6 +54,7 @@
 
         <!-- Booking Section -->
         <div class="content-container">
+            <div id="errorContainer"></div>
             <h1>Book Your parking spot</h1>
             <form id="booking-form" onkeydown="return event.key != 'Enter';" action="{{ url_for('submit_booking') }}" method="POST">
                 <div class="form-group">
@@ -95,7 +96,8 @@
         </div>
         <script type="text/javascript">
             let userId = {{ userId|tojson }};
-            const requestUrl = {{ url_for('jsGet')|tojson }}
+            const requestUrl = {{ url_for('jsGet')|tojson }};
+            let error = {{ error }};
         </script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/navigation.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/booking.js') }}"></script>

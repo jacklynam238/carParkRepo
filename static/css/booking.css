@@ -65,7 +65,6 @@ button {
     border: none;
     border-radius: 10px;
     cursor: pointer;
-<<<<<<< HEAD
     align; center;
     color: white;
     margin-left: auto;
@@ -73,11 +72,24 @@ button {
     display: block;
     margin-top: 40px;
     font-size: 1.1em;
-=======
     align-items; center;
->>>>>>> 6a6493a (.)
 }
 
 button:hover {
     background-color: #003a99;
+}
+
+.error {
+    background-color: #fad22d;
+    padding: 20px;
+    padding-bottom: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.error h2, .error p {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 10px;
+    text-align: left;
 }

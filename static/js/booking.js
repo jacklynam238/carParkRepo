@@ -42,3 +42,19 @@ function updateAvailableSeats() {
     })
 }
 
+if (error == 1) {errorMessage = "No parking spot chosen";}
+if (error == 2) {errorMessage = "You must be logged in to make a booking";}
+if (error == 3) {errorMessage = "Start time must be within opening hours (7:00AM - 7:00PM)";}
+if (error == 4) {errorMessage = "End time must be within opening hours (7:00AM - 7:00PM)";}
+if (error == 5) {errorMessage = "Start time must come before end time";}
+if (error == 6) {errorMessage = "Bookings cannot be longer than 3 hours";}
+if (error == 7) {errorMessage = "Bookings cannot be shorter than 30 minutes";}
+if (error == 8) {errorMessage = "Bookings cannot be made in the past";}
+
+
+errorHTML = `<div class="error">
+                    <h2>Error:</h2>
+                    <p>` + errorMessage + `</p>
+                </div>`;
+errorContainer = document.getElementById("errorContainer");
+errorContainer.innerHTML = errorHTML;

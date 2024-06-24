@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 from flask_sqlalchemy import SQLAlchemy
-import requests, datetime
+import requests, datetime, json
 from requests.structures import CaseInsensitiveDict
 
 USERNAME = 'root'
@@ -18,8 +18,9 @@ app.secret_key = 'pass'
 class Booking(db.Model):
     __tablename__ = 'booking_table'
     id = db.Column(db.Integer, primary_key=True)
-    startTime = db.Column(db.DateTime())
-    endTime = db.Column(db.DateTime())
+    date = db.Column(db.Date())
+    startTime = db.Column(db.Time())
+    endTime = db.Column(db.Time())
     parkSpot = db.Column(db.Integer())
     accountID = db.Column(db.Integer())
 
@@ -76,9 +77,9 @@ def account():
         bookingDataElement = [0, 0, 0, 0, 0, 0]
 
         bookingDataElement[0] = index + 1
-        bookingDataElement[1] = str(booking.startTime)[:10]
-        bookingDataElement[2] = str(booking.startTime)[11:]
-        bookingDataElement[3] = str(booking.endTime)[11:]
+        bookingDataElement[1] = str(booking.date)
+        bookingDataElement[2] = str(booking.startTime)
+        bookingDataElement[3] = str(booking.endTime)
         bookingDataElement[4] = booking.parkSpot
         bookingDataElement[5] = booking.id
 
@@ -95,20 +96,23 @@ def submit_booking():
     if request.method == 'POST':
         #Form
         date = request.form['date']
-        startTime = request.form['time']
-        endTime = request.form['endTime']
+        startTime = request.form['time'] + ":00"
+        endTime = request.form['endTime'] + ":00"
         parkSpot = int(request.form['parkSpot'])
-        startDatetime = date + " " + startTime + ":00"
-        endDateTime = date + " " + endTime + ":00"
 
         #Errors
         if(parkSpot == 0):
             return redirect('/booking')
         if(session['userId'] == 0):
             return redirect('/booking')
+        # startTime before 7am or after 7pm
+        # endTime before 7am or after 7pm
+        # endTime before startTime
+        # length is over 3 hours
+        # date is in the past
 
         #Upload
-        newBooking = Booking(startTime=startDatetime, endTime=endDateTime, parkSpot=parkSpot, accountID=session['userId'])
+        newBooking = Booking(date=date, startTime=startTime, endTime=endTime, parkSpot=parkSpot, accountID=session['userId'])
         db.session.add(newBooking)
         db.session.commit()
         return redirect('/') #Thank you page
@@ -197,6 +201,63 @@ def deleteAccount():
     db.session.commit()
     session['userId'] = 0
     return redirect('/')
+
+@app.route('/updateBooking', methods=['POST'])
+def updateBooking():
+    bookingId = request.form['bookingId']
+    date = request.form['date']
+    startTime = request.form['startTime']
+    endTime = request.form['endTime']
+    spot = int(request.form['spot'])
+
+    print(startTime)
+    print(endTime)
+
+    startTime += ":00"
+    endTime += ":00"
+
+    if datetime.datetime.strptime(startTime, "%H:%M:%S") < datetime.datetime.strptime("08:00:00", "%H:%M:%S"):
+        print("ERROR")
+    if datetime.datetime.strptime(endTime, "%H:%M:%S") > datetime.datetime.strptime("19:00:00", "%H:%M:%S"):
+        print("ERROR")
+    if spot > 8 or spot < 1:
+        print('ERROR')
+
+    booking = Booking.query.filter_by(id=bookingId).first()
+
+    booking.date = date
+    booking.startTime = startTime
+    booking.endTime = endTime
+    booking.parkSpot = spot
+
+    db.session.commit()
+
+    return redirect('/account')
+
+@app.route('/jsGet', methods=['POST'])
+def jsGet():
+    date = request.form['date']
+    startTime = datetime.datetime.strptime(str(request.form['startTime']) + ":00", "%H:%M:%S")
+    endTime = datetime.datetime.strptime(str(request.form['endTime']) + ":00", "%H:%M:%S")
+
+    sameDateBookings = Booking.query.filter_by(date=date)
+    clashedBookings = []
+    for booking in sameDateBookings:
+
+        bookingStartTime = datetime.datetime.strptime(str(booking.startTime), "%H:%M:%S")
+        bookingEndTime = datetime.datetime.strptime(str(booking.endTime), "%H:%M:%S")
+
+        if (bookingStartTime <= endTime) and (bookingEndTime >= endTime):
+            clashedBookings.append(booking.parkSpot)
+        if (bookingEndTime >= startTime) and (bookingStartTime <= startTime):
+            clashedBookings.append(booking.parkSpot)
+        if (bookingStartTime <= startTime) and (bookingEndTime >= endTime):
+            clashedBookings.append(booking.parkSpot)
+        if (bookingStartTime >= startTime) and (bookingEndTime <= endTime):
+            clashedBookings.append(booking.parkSpot)
+
+    return jsonify(clashedBookings)
+
 
 def isEmailValid(email: str):
     url = f"https://api.emailvalidation.io/v1/info?email={email}"

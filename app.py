@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 from flask_sqlalchemy import SQLAlchemy
-import requests, datetime, json
+import requests, json
 from requests.structures import CaseInsensitiveDict
+from datetime import datetime, timedelta
 
 USERNAME = 'root'
 PASSWORD = ''
@@ -41,7 +42,11 @@ def index():
 
 @app.route('/booking')
 def booking():
-    return render_template('booking.html', userId=session['userId'])
+    return render_template('booking.html', userId=session['userId'], error=0)
+
+@app.route('/booking/<error>')
+def bookingError(error):
+    return render_template('booking.html', userId=session['userId'], error=error)
 
 @app.route('/login')
 def login():
@@ -100,16 +105,30 @@ def submit_booking():
         endTime = request.form['endTime'] + ":00"
         parkSpot = int(request.form['parkSpot'])
 
+        convertedStartTime = datetime.strptime(startTime, "%H:%M:%S")
+        convertedDate = datetime.strptime(date, "%Y-%m-%d")
+        convertedEndTime = datetime.strptime(endTime, "%H:%M:%S")
+        openingTime = datetime.strptime("07:00:00", "%H:%M:%S")
+        closingTime =  datetime.strptime("19:00:00", "%H:%M:%S")
+
         #Errors
         if(parkSpot == 0):
-            return redirect('/booking')
+            return redirect('/booking/1')
         if(session['userId'] == 0):
-            return redirect('/booking')
-        # startTime before 7am or after 7pm
-        # endTime before 7am or after 7pm
-        # endTime before startTime
-        # length is over 3 hours
-        # date is in the past
+            return redirect('/booking/2')
+        if(convertedStartTime < openingTime or convertedStartTime > closingTime):
+            return redirect('/booking/3')
+        if(convertedEndTime < openingTime or convertedEndTime > closingTime):
+            return redirect('/booking/4')
+        if(convertedEndTime <= convertedStartTime):
+            return redirect('/booking/5')
+        if(convertedEndTime - convertedStartTime > timedelta(hours=3)):
+            return redirect('/booking/6')
+        if(convertedEndTime - convertedStartTime < timedelta(minutes=30)):
+            return redirect('/booking/7')
+        if(convertedDate < datetime.now()):
+            if(convertedStartTime <= datetime.now()):
+                return redirect('/booking/8')
 
         #Upload
         newBooking = Booking(date=date, startTime=startTime, endTime=endTime, parkSpot=parkSpot, accountID=session['userId'])
@@ -216,9 +235,9 @@ def updateBooking():
     startTime += ":00"
     endTime += ":00"
 
-    if datetime.datetime.strptime(startTime, "%H:%M:%S") < datetime.datetime.strptime("08:00:00", "%H:%M:%S"):
+    if datetime.strptime(startTime, "%H:%M:%S") < datetime.strptime("08:00:00", "%H:%M:%S"):
         print("ERROR")
-    if datetime.datetime.strptime(endTime, "%H:%M:%S") > datetime.datetime.strptime("19:00:00", "%H:%M:%S"):
+    if datetime.strptime(endTime, "%H:%M:%S") > datetime.strptime("19:00:00", "%H:%M:%S"):
         print("ERROR")
     if spot > 8 or spot < 1:
         print('ERROR')
@@ -237,15 +256,15 @@ def updateBooking():
 @app.route('/jsGet', methods=['POST'])
 def jsGet():
     date = request.form['date']
-    startTime = datetime.datetime.strptime(str(request.form['startTime']) + ":00", "%H:%M:%S")
-    endTime = datetime.datetime.strptime(str(request.form['endTime']) + ":00", "%H:%M:%S")
+    startTime = datetime.strptime(str(request.form['startTime']) + ":00", "%H:%M:%S")
+    endTime = datetime.strptime(str(request.form['endTime']) + ":00", "%H:%M:%S")
 
     sameDateBookings = Booking.query.filter_by(date=date)
     clashedBookings = []
     for booking in sameDateBookings:
 
-        bookingStartTime = datetime.datetime.strptime(str(booking.startTime), "%H:%M:%S")
-        bookingEndTime = datetime.datetime.strptime(str(booking.endTime), "%H:%M:%S")
+        bookingStartTime = datetime.strptime(str(booking.startTime), "%H:%M:%S")
+        bookingEndTime = datetime.strptime(str(booking.endTime), "%H:%M:%S")
 
         if (bookingStartTime <= endTime) and (bookingEndTime >= endTime):
             clashedBookings.append(booking.parkSpot)

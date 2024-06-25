@@ -2,7 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for, session, j
 from flask_sqlalchemy import SQLAlchemy
 import requests, json
 from requests.structures import CaseInsensitiveDict
-from datetime import datetime, timedelta
+from datetime import datetime
+from flask_mail import Mail, Message
 
 USERNAME = 'root'
 PASSWORD = ''
@@ -10,11 +11,20 @@ HOST = 'localhost'
 DB_NAME = 'booking_db'
 
 app = Flask(__name__)
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://' + USERNAME + ':' + PASSWORD + '@' + HOST + '/' + DB_NAME
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+app.config['MAIL_SERVER']='live.smtp.mailtrap.io'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USERNAME'] = 'api'
+app.config['MAIL_PASSWORD'] = '********167e'
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+
 db = SQLAlchemy(app)
 
-app.secret_key = 'pass'
+app.secret_key = 'wr%12h.=vxGhf^4qh1KHy?NepeWn+'
 
 class Booking(db.Model):
     __tablename__ = 'booking_table'
@@ -41,7 +51,7 @@ def index():
     return render_template('index.html', userId=session['userId'])
 
 @app.route('/booking/<error>')
-def bookingError(error):
+def booking(error):
     return render_template('booking.html', userId=session['userId'], error=error)
 
 @app.route('/login')
@@ -224,10 +234,13 @@ def updateBooking():
     date = request.form['date']
     startTime = request.form['startTime'] + ":00"
     endTime = request.form['endTime'] + ":00"
-    spot = int(request.form['spot'])
 
-    if not validateDateInput(date) or not validateTimeInput(startTime) or not validateTimeInput(endTime) or request.form['spot'] == "" or request.form['spot'] == None:
+    if not validateDateInput(date) or not validateTimeInput(startTime) or not validateTimeInput(endTime):
         return redirect('/account/1')
+    if request.form['spot'] == None or request.form['spot'] == "":
+        return redirect('/account/1')
+
+    spot = int(request.form['spot'])
 
     convertedStartTime = datetime.strptime(startTime, "%H:%M:%S")
     convertedDate = datetime.strptime(date, "%Y-%m-%d")
@@ -304,7 +317,7 @@ def validateDateInput(input):
         datetime.strptime(input, "%Y-%m-%d")
         return True
     except ValueError:
-        raise ValueError("Incorrect data format, should be YYYY-MM-DD")
+        return False
 
 def getClashedBookings(date, startTime, endTime):
     sameDateBookings = Booking.query.filter_by(date=date)

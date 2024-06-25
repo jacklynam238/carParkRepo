@@ -97,7 +97,7 @@
         <script type="text/javascript">
             let userId = {{ userId|tojson }};
             const requestUrl = {{ url_for('jsGet')|tojson }};
-            let error = {{ error }};
+            let error = {{ error|tojson }};
         </script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/navigation.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/booking.js') }}"></script>

@@ -25,10 +25,10 @@ function updateBooking(bookingIndex) {
     spotInputs[bookingIndex-1].innerHTML = "<input name='spot' value='" + spotValue + "' type='number'/>";
 
     originalButtonsHTML =  buttonContainer[bookingIndex-1].innerHTML;
-    let updatingButtonsHTML =  `<div class="row buttonContainer">
+    let updatingButtonsHTML =  `
                                     <button style="margin-left: auto;" class="delete" onClick="cancelChanges(${bookingIndex})">Cancel</button>
                                     <button style="width: auto;" class="update" onClick="applyChanges(${bookingIndex})">Apply</button>
-                                </div>`;
+                               `;
     buttonContainer[bookingIndex-1].innerHTML = updatingButtonsHTML;
 }
 
@@ -42,3 +42,19 @@ function cancelChanges(bookingIndex) {
 function applyChanges(bookingIndex) {
     forms[bookingIndex-1].submit();
 }
+
+if (error == 1) {errorMessage = "Invalid form data. Please make sure all fields are filled out";}
+if (error == 2) {errorMessage = "Start time must be within opening hours (7:00AM - 7:00PM)";}
+if (error == 3) {errorMessage = "End time must be within opening hours (7:00AM - 7:00PM)";}
+if (error == 4) {errorMessage = "Start time must come before end time";}
+if (error == 5) {errorMessage = "Bookings cannot be longer than 3 hours";}
+if (error == 6) {errorMessage = "Bookings cannot be shorter than 30 minutes";}
+if (error == 7) {errorMessage = "Bookings cannot be made in the past";}
+if (error == 8) {errorMessage = "Booking clashes with another. Please select a different parking spot or time and try again.";}
+
+errorHTML = `<div class="error">
+                    <h2>Error:</h2>
+                    <p>` + errorMessage + `</p>
+                </div>`;
+errorContainer = document.getElementById("errorContainer");
+errorContainer.innerHTML = errorHTML;

@@ -95,3 +95,18 @@ input {
     padding: 5px;
     font-size: 1em;
 }
+
+.error {
+    background-color: #fad22d;
+    padding: 20px;
+    padding-bottom: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.error h2, .error p {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 10px;
+    text-align: left;
+}

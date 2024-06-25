@@ -33,6 +33,7 @@ body {
     margin: 0;
     max-width: 100%;
     font-family: 'Ericsson';
+    padding-bottom: 180px;
 }
 
 .content-container h1 {

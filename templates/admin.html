@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Admin</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/account.css') }}">
+
+        <style>
+            table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+                tr:nth-child(even) {
+  background-color: #D6EEEE;
+}
+        </style>
+    </head>
+    <body>
+        <nav>
+            <ul id="navigation"></ul>
+        </nav>
+
+        <div class="content-container">
+            <h1>Admin</h1>
+            <div class="user-info">
+                <h2>User Information</h2>
+                <div class="row">
+                    <label for="username">Full name:</label>
+                    <p style="margin-left: auto;" id="username">Paul</p>
+                </div>
+                <div class="row">
+                    <label for="email">Email:</label>
+                    <p style="margin-left: auto;" id="email">francis</p>
+                </div>
+                <div class="row">
+                    <label for="email">Password:</label>
+                    <button style="margin-left: auto;" type="submit">Update Password</button>
+                </div>
+            </div>
+            <div>
+            <h1>username</h1>
+             <table style="width:100%">
+              <tr>
+                <th>username</th>
+                <th>email</th>
+                <th>booking number</th>
+              </tr>
+                 <tr>
+                <td>username</td>
+                <td>email</td>
+                <td>booking number</td>
+              </tr>
+                 <tr>
+                <td>username</td>
+                <td>email</td>
+                <td>booking number</td>
+              </tr>
+             </table>
+            </div>
+
+
+            <div class="row">
+                <button style="margin-left: 20px;" id="logout"><a href="/logout">Logout</a></button>
+            </div>
+        </div>
+
+        <script type="text/javascript"> let userId = {{userId}} </script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/navigation.js') }}"></script>
+    </body>\
+</html>

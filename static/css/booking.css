@@ -1,3 +1,4 @@
+    /* Background */
 body {
     background-image: url("../images/turbine12crop.jpg");
 
@@ -35,11 +36,11 @@ body {
     font-family: 'Ericsson';
     padding-bottom: 180px;
 }
-
+    /* Book Your Parking Spot */
 .content-container h1 {
     font-size: 3em;
 }
-
+    /* Box Headings */
 .form-group {
     margin-bottom: 15px;
     text-align: left;
@@ -49,7 +50,7 @@ label {
     display: block;
     margin-bottom: 5px;
 }
-
+    /* Boxes */
 input {
     width: 100%;
     padding: 10px;
@@ -59,7 +60,7 @@ input {
     font-family: 'Ericsson';
 
 }
-
+    /* Book Button */
 button {
     padding: 10px 20px;
     background-color: #1174e6;
@@ -79,7 +80,7 @@ button {
 button:hover {
     background-color: #003a99;
 }
-
+    /* Error Message */
 .error {
     background-color: #fad22d;
     padding: 20px;

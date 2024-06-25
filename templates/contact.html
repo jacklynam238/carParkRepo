@@ -16,6 +16,7 @@
         </div>
 
         <div class="content-container">
+            <div id="errorContainer"></div>
             <div class="row">
                 <span>
                     <h1>Contact</h1>
@@ -36,7 +37,7 @@
                 </div>
             </div>
 
-            <form>
+            <form action="/submitContact" method="POST">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required>
 
@@ -59,7 +60,10 @@
             </p>
         </div>
 
-        <script type="text/javascript"> let userId = {{userId}} </script>
+        <script type="text/javascript">
+            let userId = {{userId|tojson}};
+            let error = {{error|tojson}};
+        </script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/navigation.js') }}"></script>
     </body>
 </html>

@@ -2,7 +2,7 @@
   font-family: Ericsson;
   src: url('../fonts/RundReg.otf') format("opentype");
 }
-
+    /* Background */
 body {
     margin: 0;
     padding: 0;
@@ -15,7 +15,7 @@ body {
     font-family: 'Roboto';
     overflow-x: hidden;
 }
-
+    /* Nav Bar Buttons */
 .logo {
     width: 100px; /* Adjust the width as needed */
     height: auto;
@@ -59,6 +59,7 @@ li a img {
   height: 100%;
 }
 
+    /* Footer */
 .footer {
     background-color: #333;
     color: #fff;

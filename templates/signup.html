@@ -5,10 +5,6 @@
     </head>
 
     <body class="background-tint">
-        <div class="welcome-container">
-            <h1>Sign Up</h1>
-        </div>
-
         <div class="signupContainer">
             <div id="errorContainer"></div>
             <h2>Sign Up</h2>
@@ -32,6 +28,9 @@
                 <button type="submit">Sign Up</button>
             </form>
         </div>
+        <video width= "100%" autoplay muted id="background">
+            <source src="../static/videos/backgroundvid.mp4" type="video/MP4">
+          </video>
 
         <script type="text/javascript"> let error = {{error}} </script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/signup.js') }}"></script>

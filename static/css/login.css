@@ -4,7 +4,6 @@
 }
 
 body {
-    background-image: url('../images/loginsignin.avif');
     background-size: 100%; /* Cover the entire page */
     background-repeat: no-repeat; /* Do not repeat the image */
     background-attachment: fixed; /* Fixed background image */
@@ -73,3 +72,13 @@ button:hover {
     margin-bottom: 10px;
     text-align: left;
 }
+
+#background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+ }

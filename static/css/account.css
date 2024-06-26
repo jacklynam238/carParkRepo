@@ -3,8 +3,9 @@ body {
     height: 100%;
 }
 
+/* Content Container */
 .content-container {
-    background: white;
+    background: white; /* Background */
     width: 80%;
     height: auto;
     display: flex;
@@ -16,94 +17,103 @@ body {
     font-family: 'Ericsson';
 }
 
+/* Page Headings */
 .content-container h1 {
     font-size: 3em;
 }
 
+/* User Info Block */
 .user-info{
     width: 94%;
-    border: 2px solid black;
+    border: 2px solid black; /* Border */
     padding: 2% 3%;
-    background: #EEE;
+    background: #EEE;        /* Background Color */
     border-radius: 15px;
 }
 
+/* Row */
 .row {
-    display: flex;
+    display: flex; /* Align Items Horizontally */
     align-items: center;
     height: 50px;
     font-size: 1.3em;
 }
 
+/* Left-hand side Label */
 .row label {
     margin: 0;
     padding: 0;
 }
 
+/* Right-hand side Data */
 .row p {
     margin-left: 50px;
 }
 
+/* Button */
 button {
     padding: 10px 20px;
-    background-color: #1174e6;
+    background-color: #1174e6; /* Ericsson Blue */
     color: #fff;
-    border: none;
-    border-radius: 4px;
+    border: none;   /* Remove Default Style */
+    border-radius: 4px; /* Curved Corners */
     cursor: pointer;
     font-size: 0.8em;
     font-family: 'Ericsson';
 }
-
 button:hover {
     background-color: #4784e;
 }
 
+/* Delete, logout and update buttons */
 .delete, #logout, .update {
     margin-top: 30px;
     width: 190px;
     font-size: 1em;
     margin-bottom: 15px;
 }
-
-.delete {
-    background-color: #f06060;
-}
-
 #logout a, .delete a, .update a {
     color: white;
-    text-decoration: none;
+    text-decoration: none;  /* Remove Default Link Style */
 }
 
+/* Delete background */
+.delete {
+    background-color: #f06060; /* Delete Red */
+}
+
+/* Booking */
 .booking {
     display: flex;
-    flex-flow: column;
+    flex-flow: column; /* Align Items Vertically */
     background-color: #EEE;
     border-radius: 10px;
     padding: 10px 25px;
     margin-bottom: 20px;
 }
 
+/* Booking Buttons */
 .booking .delete, .booking .update {
     font-size: 0.7em;
     margin-left: 10px;
     width: auto;
 }
 
+/* Booking Inputs */
 input {
     font-family: 'Ericsson';
     padding: 5px;
     font-size: 1em;
 }
 
+/* Error Message */
 .error {
-    background-color: #fad22d;
+    background-color: #fad22d; /* Yellow from Ericsson's Site */
     padding: 20px;
     padding-bottom: 10px;
     padding-bottom: 10px;
     margin-bottom: 15px;
 }
-
 .error h2, .error p {
     width: 100%;
     margin: 0;

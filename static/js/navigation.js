@@ -1,10 +1,11 @@
+// get nav container
 navigation = document.getElementById('navigation');
 
-if (userId == 0) {
+if (userId == 0) {          //user logged out
     userLoggedOut();
-} else if (userId == 1) {
+} else if (userId == 1) {   //admin logged in
     adminLoggedIn();
-} else {
+} else {                    //user logged in
     userLoggedIn();
 }
 

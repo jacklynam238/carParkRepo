@@ -2,18 +2,20 @@ body {
     background-image: url("../images/img5.jpg");
 }
 
+/* Heading and Image at top of page */
 .welcome-container {
     display: flex;
-    align-items: center;
-    justify-content: left;
+    align-items: center;    /* Center Vertically */
+    justify-content: left;  /* Align Left */
     height: 50vh;
     width: 84%;
     padding: 0 8%;
     max-width: 100%;
     background: rgb(2,0,36);
-    background: linear-gradient(90deg, rgba(2,0,36,0.5) 0%, rgba(1,0,15,0.2) 34%, rgba(0,0,0,0) 100%);
+    background: linear-gradient(90deg, rgba(2,0,36,0.5) 0%, rgba(1,0,15,0.2) 34%, rgba(0,0,0,0) 100%); /* Gradient Tint */
 }
 
+/* Heading */
 .welcome-container h1 {
     font-size: 5em;
     color: white;
@@ -25,6 +27,7 @@ body {
     height: 110px;
 }
 
+/* White Content Section Below Header */
 .content-container {
     background: white;
     width: 80%;
@@ -38,22 +41,27 @@ body {
     font-family: 'Ericsson';
 }
 
+/* Content Heading */
 .content-container h1 {
     font-size: 3em;
 }
 
+/* Row */
 .row {
     display: flex;
 }
 
+/* Row Heading */
 .row h1 {
     margin-left: 50px;
 }
 
+/* Row Paragraph */
 .row p {
     margin-left: 50px;
 }
 
+/* Row Image */
 .row img {
     margin-top: auto;
     margin-bottom: auto;

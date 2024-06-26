@@ -1,3 +1,4 @@
+// car park booking buttons
 const seats = document.querySelectorAll('.seat');
 const selectedSpotDisplay = document.getElementById('selectedSpot');
 const input = document.getElementById('parkSpot');
@@ -12,36 +13,42 @@ seats.forEach(seat => {
     });
 });
 
+// find form inputs
 const dateInput = document.getElementById('date');
 const startTimeInput = document.getElementById('time');
 const endTimeInput = document.getElementById('endTime');
 
+// when input values are changed
 dateInput.addEventListener('input', updateAvailableSeats);
 startTimeInput.addEventListener('input', updateAvailableSeats);
 endTimeInput.addEventListener('input', updateAvailableSeats);
 
 function updateAvailableSeats() {
+    // collect form data
     let data = new FormData();
     data.append("date", dateInput.value);
     data.append("startTime", startTimeInput.value);
     data.append("endTime", endTimeInput.value);
 
+    // request clashing bookings from flask
     fetch(requestUrl, {
         "method": "POST",
         "body": data,
     }).then(response => response.json()).then(json => {
+        // add unavailable class to taken spots
         seats.forEach(s => s.classList.remove('unavailable'));
         for (let i=0; i<json.length; i++) {
             seats[json[i] - 1].classList.add('unavailable');
+            // remove selected
             if (seats[json[i] - 1].classList.contains('selected')) {
                 seats[json[i] - 1].classList.remove('selected');
                 input.value = 0;
             }
         }
-        console.log(json);
     })
 }
 
+//error messages
 if (error == 1) {errorMessage = "No parking spot chosen";}
 if (error == 2) {errorMessage = "You must be logged in to make a booking";}
 if (error == 3) {errorMessage = "Start time must be within opening hours (7:00AM - 7:00PM)";}
@@ -51,7 +58,7 @@ if (error == 6) {errorMessage = "Bookings cannot be longer than 3 hours";}
 if (error == 7) {errorMessage = "Bookings cannot be shorter than 30 minutes";}
 if (error == 8) {errorMessage = "Bookings cannot be made in the past";}
 
-
+//add error to html
 errorHTML = `<div class="error">
                     <h2>Error:</h2>
                     <p>` + errorMessage + `</p>

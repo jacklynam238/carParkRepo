@@ -1,9 +1,11 @@
-from flask import Flask, render_template, request, redirect, url_for, session, jsonify
+#Modules
+from flask import Flask, render_template, request, redirect, session, jsonify
 from flask_sqlalchemy import SQLAlchemy
-import requests, json
+import requests
 from requests.structures import CaseInsensitiveDict
 from datetime import datetime, timedelta
 
+#Config
 USERNAME = 'root'
 PASSWORD = ''
 HOST = 'localhost'
@@ -16,6 +18,7 @@ db = SQLAlchemy(app)
 
 app.secret_key = 'wr%12h.=vxGhf^4qh1KHy?NepeWn+'
 
+#Message Object
 class Message(db.Model):
     __tablename__ = 'contact_table'
     id = db.Column(db.Integer, primary_key=True)
@@ -23,6 +26,7 @@ class Message(db.Model):
     email = db.Column(db.String())
     message = db.Column(db.String())
 
+#Booking Object
 class Booking(db.Model):
     __tablename__ = 'booking_table'
     id = db.Column(db.Integer, primary_key=True)
@@ -34,6 +38,7 @@ class Booking(db.Model):
 
     time = str(startTime)[11:]
 
+#Account Object
 class Account(db.Model):
     __tablename__ = 'account_table'
     id = db.Column(db.Integer, primary_key=True)
@@ -42,68 +47,109 @@ class Account(db.Model):
     fullname = db.Column(db.String())
     registration = db.Column(db.String())
 
-@app.route('/')
+#Page Routes
+@app.route('/') #Index
 def index():
     if not session.get('userId'):
         session['userId'] = 0
-    print(session['userId'])
     return render_template('index.html', userId=session['userId'])
-
-@app.route('/booking/<error>')
+@app.route('/booking/<error>') #Booking
 def booking(error):
     return render_template('booking.html', userId=session['userId'], error=error)
-
-@app.route('/login')
+@app.route('/login') #Login
 def login():
     return render_template('login.html')
-
-@app.route('/signup')
+@app.route('/signup') #Signup
 def signup():
     return render_template('signup.html')
-
-@app.route('/about')
+@app.route('/about') #About
 def about():
     return render_template('about.html', userId=session['userId'])
-
-@app.route('/contact/<error>')
+@app.route('/contact/<error>') #Contact
 def contact(error):
     return render_template('contact.html', userId=session['userId'], error=error)
-
-@app.route('/tandc')
+@app.route('/tandc') #Terms and Conditions
 def tandc():
     return render_template('tandc.html', userId=session['userId'])
+@app.route('/thankyou') #Thank You
+def thankyou():
+    return render_template('thankyou.html')
 
-@app.route('/account/<error>')
+#Account and Admin Page
+@app.route('/account/<error>') #Account
 def account(error):
+    #User Data
     userAccount = Account.query.filter_by(id=session['userId']).first()
     userName = userAccount.fullname
     userEmail = userAccount.email
     userReg = userAccount.registration
     data = [userName, userEmail, userReg]
-    
+
+    #Booking Data
     bookings = Booking.query.filter_by(accountID=session['userId'])
     futureBookings = bookings.filter(Booking.date >= datetime.today())
-    bookingData = []
+    bookingData = [] #Multi-Dimensional Array
     for index in range(len(list(futureBookings))):
         booking = futureBookings[index]
         bookingDataElement = [0, 0, 0, 0, 0, 0]
 
-        bookingDataElement[0] = index + 1
-        bookingDataElement[1] = str(booking.date)
-        bookingDataElement[2] = str(booking.startTime)
-        bookingDataElement[3] = str(booking.endTime)
-        bookingDataElement[4] = booking.parkSpot
-        bookingDataElement[5] = booking.id
+        bookingDataElement[0] = index + 1               #Booking Index
+        bookingDataElement[1] = str(booking.date)       #Booking Date
+        bookingDataElement[2] = str(booking.startTime)  #Booking Start Time
+        bookingDataElement[3] = str(booking.endTime)    #Booking End Time
+        bookingDataElement[4] = booking.parkSpot        #Booking Park Spot
+        bookingDataElement[5] = booking.id              #Booking ID
 
         bookingData.append(bookingDataElement)
 
     return render_template('account.html', userId=session['userId'], data=data, bookingData=bookingData, error=error)
 
-@app.route('/thankyou')
-def thankyou():
-    return render_template('thankyou.html')
+@app.route('/admin') #Admin
+def admin():
+    #User Data
+    userAccount = Account.query.filter_by(id=session['userId']).first()
+    userName = userAccount.fullname
+    userEmail = userAccount.email
+    userReg = userAccount.registration
+    data = [userName, userEmail, userReg]
 
-@app.route('/submit_booking', methods=['POST'])
+    #Booking Data
+    futureBookings = Booking.query.filter(Booking.date >= datetime.today())
+    bookingData = []
+    for index in range(len(list(futureBookings))):
+        booking = futureBookings[index]
+        user = Account.query.filter_by(id=booking.accountID).first()
+        bookingDataElement = [0, 0, 0, 0, 0, 0, 0, 0]
+
+        bookingDataElement[0] = user.fullname           #User Name
+        bookingDataElement[1] = user.email              #User Email
+        bookingDataElement[7] = user.registration       #User Registration
+        bookingDataElement[2] = str(booking.date)       #Booking Date
+        bookingDataElement[3] = str(booking.startTime)  #Booking Start Time
+        bookingDataElement[4] = str(booking.endTime)    #Booking End Time
+        bookingDataElement[5] = booking.parkSpot        #Booking Park Spot
+        bookingDataElement[6] = booking.id              #Booking ID
+
+        bookingData.append(bookingDataElement)
+
+    #Contact Data
+    messages = Message.query.all()
+    messageData = []
+    for index in range(len(list(messages))):
+        message = messages[index]
+        messageDataElement = [0, 0, 0, 0]
+
+        messageDataElement[1] = message.fullname    #User Name
+        messageDataElement[2] = message.email       #User Email
+        messageDataElement[3] = message.message     #Uaer Message
+        messageDataElement[0] = message.id          #User ID
+
+        messageData.append(messageDataElement)
+
+    return render_template('admin.html', userId=session['userId'], data=data, bookings=bookingData, messages=messageData)
+
+#Booking Database Connection
+@app.route('/submit_booking', methods=['POST']) #Submit Booking
 def submit_booking():
     if request.method == 'POST':
         #Form
@@ -112,6 +158,7 @@ def submit_booking():
         endTime = request.form['endTime'] + ":00"
         parkSpot = int(request.form['parkSpot'])
 
+        #Form Converted to Pyhton DataTypes
         convertedStartTime = datetime.strptime(startTime, "%H:%M:%S")
         convertedDate = datetime.strptime(date, "%Y-%m-%d")
         convertedEndTime = datetime.strptime(endTime, "%H:%M:%S")
@@ -119,21 +166,21 @@ def submit_booking():
         closingTime =  datetime.strptime("19:00:00", "%H:%M:%S")
 
         #Errors
-        if(parkSpot == 0):
+        if(parkSpot == 0):                                                          #No Spot Selected
             return redirect('/booking/1')
-        if(session['userId'] == 0):
+        if(session['userId'] == 0):                                                 #User Not Logged In
             return redirect('/booking/2')
-        if(convertedStartTime < openingTime or convertedStartTime > closingTime):
+        if(convertedStartTime < openingTime or convertedStartTime > closingTime):   #Booking Begins Outside Open Hours
             return redirect('/booking/3')
-        if(convertedEndTime < openingTime or convertedEndTime > closingTime):
+        if(convertedEndTime < openingTime or convertedEndTime > closingTime):       #Booking Ends Outside Open Hours
             return redirect('/booking/4')
-        if(convertedEndTime <= convertedStartTime):
+        if(convertedEndTime <= convertedStartTime):                                 #Booking Ends before it Begins
             return redirect('/booking/5')
-        if(convertedEndTime - convertedStartTime > timedelta(hours=3)):
+        if(convertedEndTime - convertedStartTime > timedelta(hours=3)):             #Booking longer than 3hrs
             return redirect('/booking/6')
-        if(convertedEndTime - convertedStartTime < timedelta(minutes=30)):
+        if(convertedEndTime - convertedStartTime < timedelta(minutes=30)):          #Booking shorter than 30mins
             return redirect('/booking/7')
-        if(convertedDate < datetime.now()):
+        if(convertedDate < datetime.now()):                                         #Booking is in past
             if(convertedStartTime <= datetime.now()):
                 return redirect('/booking/8')
 
@@ -143,8 +190,68 @@ def submit_booking():
         db.session.commit()
         return redirect('/') #Thank you page
     return redirect('/booking/0')
+@app.route('/deleteBooking/<bookingId>/<destination>') #Delete Booking
+def deleteBooking(bookingId, destination):
+    booking = Booking.query.filter_by(id=bookingId).first()
+    db.session.delete(booking)
+    db.session.commit()
+    if destination == "1":
+        return redirect('/admin')
+    return redirect('/account/0')
+@app.route('/updateBooking', methods=['POST']) #Update Booking
+def updateBooking():
+    #Form
+    bookingId = request.form['bookingId']
+    date = request.form['date']
+    startTime = request.form['startTime'] + ":00"
+    endTime = request.form['endTime'] + ":00"
 
-@app.route('/submit_signup', methods=['POST'])
+    #Check Form Fields Valid
+    if not validateDateInput(date) or not validateTimeInput(startTime) or not validateTimeInput(endTime):
+        return redirect('/account/1')
+    if request.form['spot'] == None or request.form['spot'] == "":
+        return redirect('/account/1')
+
+    spot = int(request.form['spot'])
+
+    #Form Converted to Python Datatypes
+    convertedStartTime = datetime.strptime(startTime, "%H:%M:%S")
+    convertedDate = datetime.strptime(date, "%Y-%m-%d")
+    convertedEndTime = datetime.strptime(endTime, "%H:%M:%S")
+    openingTime = datetime.strptime("07:00:00", "%H:%M:%S")
+    closingTime = datetime.strptime("19:00:00", "%H:%M:%S")
+
+    if (convertedStartTime < openingTime or convertedStartTime > closingTime):  #Booking Begins Outside Open Hours
+        return redirect('/account/2')
+    if (convertedEndTime < openingTime or convertedEndTime > closingTime):      #Booking Ends Outside Open Hours
+        return redirect('/account/3')
+    if (convertedEndTime <= convertedStartTime):                                #Booking Ends Before It Begins
+        return redirect('/account/4')
+    if (convertedEndTime - convertedStartTime > timedelta(hours=3)):            #Booking Is Longer Than 3 Hours
+        return redirect('/account/5')
+    if (convertedEndTime - convertedStartTime < timedelta(minutes=30)):         #Booking Is Shorter Than 30 Mins
+        return redirect('/account/6')
+    if (convertedDate < datetime.now()):                                        #Booking Is In The Past
+        if (convertedStartTime <= datetime.now()):
+            return redirect('/account/7')
+    clashedBookings = getClashedBookings(date, convertedStartTime, convertedEndTime)
+    if spot in list(clashedBookings):                                           #Parking Spot Clashes with Other Booking
+        return redirect('/account/8')
+
+    #Change Booking Data
+    booking = Booking.query.filter_by(id=bookingId).first()
+
+    booking.date = date
+    booking.startTime = startTime
+    booking.endTime = endTime
+    booking.parkSpot = spot
+
+    db.session.commit()
+
+    return redirect('/account/0')
+
+#Account Database Connection
+@app.route('/submit_signup', methods=['POST']) #Submit Signup
 def submit_signup():
     if request.method == 'POST':
         #Form
@@ -156,14 +263,16 @@ def submit_signup():
 
         #Errors
         if confirmPassword != password:
-            return render_template('signup.html', error=1)
+            return render_template('signup.html', error=1)      #Passwords are Different
         for account in Account.query.all():
             if account.email == email:
-                return render_template('signup.html', error=2)
+                return render_template('signup.html', error=2)  #Email is Used Already
         if isEmailValid(email) == False:
-            return render_template('signup.html', error=3)
+            return render_template('signup.html', error=3)      #Email is Invalid
+
+        #Password Strength Requirements
         if len(password) < 10:
-            return render_template('signup.html', error=4)
+            return render_template('signup.html', error=4)      #Password Too Short
         passHasUpper = False
         passHasNum = False
         for char in password:
@@ -172,9 +281,9 @@ def submit_signup():
             if char.isdigit():
                 passHasNum = True
         if not passHasUpper:
-            return render_template('signup.html', error=5)
+            return render_template('signup.html', error=5)      #No uppercase letters
         if not passHasNum:
-            return render_template('signup.html', error=6)
+            return render_template('signup.html', error=6)      #No numbers
 
         #Upload
         newAccount = Account(fullname=name, email=email, password=password, registration=registration)
@@ -184,8 +293,7 @@ def submit_signup():
         session['userId'] = newAccount.id
         return redirect('/thankyou')
     return render_template('signup.html', error=4)
-
-@app.route('/submit_login', methods=['POST'])
+@app.route('/submit_login', methods=['POST']) #Submit Login
 def submit_login():
     if request.method == 'POST':
         #Form
@@ -199,94 +307,29 @@ def submit_login():
             if account.email == email:
                 validEmail = True
         if not validEmail:
-            return render_template('login.html', error=1)
+            return render_template('login.html', error=1)   #Email Not Registered
         userAccount = Account.query.filter_by(email=email).first()
         #Is password correct
         if userAccount.password != password:
-            return render_template('login.html', error=2)
+            return render_template('login.html', error=2)   #WrongPassword
 
         session['userId'] = userAccount.id
         return redirect('/')
     return render_template('login.html', error=3)
-
-@app.route('/logout')
-def logout():
-    session['userId'] = 0
-    return redirect('/')
-
-@app.route('/deleteBooking/<bookingId>/<destination>')
-def deleteBooking(bookingId, destination):
-    booking = Booking.query.filter_by(id=bookingId).first()
-    db.session.delete(booking)
-    db.session.commit()
-    if destination == "1":
-        return redirect('/admin')
-    return redirect('/account/0')
-
-@app.route('/deleteAccount')
+@app.route('/deleteAccount') #Delete Account
 def deleteAccount():
     user = Account.query.filter_by(id=session['userId']).first()
     db.session.delete(user)
     db.session.commit()
     session['userId'] = 0
     return redirect('/')
+@app.route('/logout') #Logout
+def logout():
+    session['userId'] = 0
+    return redirect('/')
 
-@app.route('/deleteMessage/<messageId>')
-def deleteMessage(messageId):
-    message = Message.query.filter_by(id=messageId).first()
-    db.session.delete(message)
-    db.session.commit()
-    return redirect('/admin')
-
-@app.route('/updateBooking', methods=['POST'])
-def updateBooking():
-    bookingId = request.form['bookingId']
-    date = request.form['date']
-    startTime = request.form['startTime'] + ":00"
-    endTime = request.form['endTime'] + ":00"
-
-    if not validateDateInput(date) or not validateTimeInput(startTime) or not validateTimeInput(endTime):
-        return redirect('/account/1')
-    if request.form['spot'] == None or request.form['spot'] == "":
-        return redirect('/account/1')
-
-    spot = int(request.form['spot'])
-
-    convertedStartTime = datetime.strptime(startTime, "%H:%M:%S")
-    convertedDate = datetime.strptime(date, "%Y-%m-%d")
-    convertedEndTime = datetime.strptime(endTime, "%H:%M:%S")
-    openingTime = datetime.strptime("07:00:00", "%H:%M:%S")
-    closingTime = datetime.strptime("19:00:00", "%H:%M:%S")
-
-    if (convertedStartTime < openingTime or convertedStartTime > closingTime):
-        return redirect('/account/2')
-    if (convertedEndTime < openingTime or convertedEndTime > closingTime):
-        return redirect('/account/3')
-    if (convertedEndTime <= convertedStartTime):
-        return redirect('/account/4')
-    if (convertedEndTime - convertedStartTime > timedelta(hours=3)):
-        return redirect('/account/5')
-    if (convertedEndTime - convertedStartTime < timedelta(minutes=30)):
-        return redirect('/account/6')
-    if (convertedDate < datetime.now()):
-        if (convertedStartTime <= datetime.now()):
-            return redirect('/account/7')
-    clashedBookings = getClashedBookings(date, convertedStartTime, convertedEndTime)
-    if spot in list(clashedBookings):
-        return redirect('/account/8')
-
-    booking = Booking.query.filter_by(id=bookingId).first()
-
-    booking.date = date
-    booking.startTime = startTime
-    booking.endTime = endTime
-    booking.parkSpot = spot
-
-    db.session.commit()
-
-    return redirect('/account/0')
-
-@app.route('/submitContact', methods=['POST'])
+#Contact Database Connectivity
+@app.route('/submitContact', methods=['POST']) #Submit Message
 def submitContact():
     if request.method == 'POST':
         #Form
@@ -295,61 +338,24 @@ def submitContact():
         body = request.form['message']
 
         #Is email registered
-        validEmail = False
-        for account in Account.query.all():
-            if account.email == email:
-                validEmail = True
-        if not validEmail:
-            redirect('contact/1')
+        if isEmailValid(email) == False:
+            redirect('contact/1')   #Email Invalid
 
+        #Upload
         newMessage = Message(fullname=name, email=email, message=body)
         db.session.add(newMessage)
         db.session.commit()
         return redirect('/')
     return redirect('contact/0')
+@app.route('/deleteMessage/<messageId>') #DeleteMessage
+def deleteMessage(messageId):
+    message = Message.query.filter_by(id=messageId).first()
+    db.session.delete(message)
+    db.session.commit()
+    return redirect('/admin')
 
-@app.route('/admin')
-def admin():
-    userAccount = Account.query.filter_by(id=session['userId']).first()
-    userName = userAccount.fullname
-    userEmail = userAccount.email
-    userReg = userAccount.registration
-    data = [userName, userEmail, userReg]
-
-    futureBookings = Booking.query.filter(Booking.date >= datetime.today())
-    bookingData = []
-    for index in range(len(list(futureBookings))):
-        booking = futureBookings[index]
-        user = Account.query.filter_by(id=booking.accountID).first()
-        bookingDataElement = [0, 0, 0, 0, 0, 0, 0, 0]
-
-        bookingDataElement[0] = user.fullname
-        bookingDataElement[1] = user.email
-        bookingDataElement[7] = user.registration
-        bookingDataElement[2] = str(booking.date)
-        bookingDataElement[3] = str(booking.startTime)
-        bookingDataElement[4] = str(booking.endTime)
-        bookingDataElement[5] = booking.parkSpot
-        bookingDataElement[6] = booking.id
-
-        bookingData.append(bookingDataElement)
-
-    messages = Message.query.all()
-    messageData = []
-    for index in range(len(list(messages))):
-        message = messages[index]
-        messageDataElement = [0, 0, 0, 0]
-
-        messageDataElement[1] = message.fullname
-        messageDataElement[2] = message.email
-        messageDataElement[3] = message.message
-        messageDataElement[0] = message.id
-
-        messageData.append(messageDataElement)
-
-    return render_template('admin.html', userId=session['userId'], data=data, bookings=bookingData, messages=messageData)
-
-@app.route('/jsGet', methods=['POST'])
+#Other Functions
+@app.route('/jsGet', methods=['POST']) #Get Clashed Bookings and Jsonify for Javascript
 def jsGet():
     date = request.form['date']
     startTime = datetime.strptime(str(request.form['startTime']) + ":00", "%H:%M:%S")
@@ -358,9 +364,7 @@ def jsGet():
     clashedBookings = getClashedBookings(date, startTime, endTime)
 
     return jsonify(clashedBookings)
-
-
-def isEmailValid(email: str):
+def isEmailValid(email: str): #Check For Valid Email
     url = f"https://api.emailvalidation.io/v1/info?email={email}"
 
     headers = CaseInsensitiveDict()
@@ -377,26 +381,24 @@ def isEmailValid(email: str):
         return format_valid and mx_found and smtp_check and state == "deliverable"
 
     return False
-
-def validateTimeInput(input):
+def validateTimeInput(input): #Check Time Input Is Valid
     try:
         datetime.strptime(input, "%H:%M:%S")
         return True
     except ValueError:
         return False
-
-def validateDateInput(input):
+def validateDateInput(input): #Check Date Input Is Valid
     try:
         datetime.strptime(input, "%Y-%m-%d")
         return True
     except ValueError:
         return False
-
-def getClashedBookings(date, startTime, endTime):
+def getClashedBookings(date, startTime, endTime): #Get Clashed Bookings
     sameDateBookings = Booking.query.filter_by(date=date)
     clashedBookings = []
     for booking in sameDateBookings:
 
+        #Convert Times to Python Datatype
         bookingStartTime = datetime.strptime(str(booking.startTime), "%H:%M:%S")
         bookingEndTime = datetime.strptime(str(booking.endTime), "%H:%M:%S")
 

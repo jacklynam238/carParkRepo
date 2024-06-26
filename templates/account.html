@@ -41,7 +41,7 @@
                 <div id="errorContainer"></div>
                 <!-- For Every Booking in the database -->
                 {% for booking in bookingData %}
-                <form action="/updateBooking" method="POST" class="booking">]
+                <form action="/updateBooking" method="POST" class="booking">
                     <!-- Booking ID -->
                     <input type="hidden" name="bookingId" value="{{ booking[5] }}">
                     <!-- Booking Number -->

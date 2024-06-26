@@ -3,12 +3,13 @@ body {
     height: 100%;
 }
 
+/* Content Container */
 .content-container {
     background: white;
     width: 80%;
     height: auto;
     display: flex;
-    flex-flow: column;
+    flex-flow: column; /* Display vertically */
     height: 100%;
     padding: 3% 10vw;
     margin: 0;
@@ -16,10 +17,12 @@ body {
     font-family: 'Ericsson';
 }
 
+/* Page Heading */
 .content-container h1 {
     font-size: 3em;
 }
 
+/* User Content */
 .user-info{
     width: 94%;
     border: 2px solid black;
@@ -28,37 +31,41 @@ body {
     border-radius: 15px;
 }
 
+/* Row */
 .row {
-    display: flex;
+    display: flex; /* Display Horizontally */
     align-items: center;
     height: 50px;
     font-size: 1.3em;
 }
 
+/* Left-hand side Labels */
 .row label {
     margin: 0;
     padding: 0;
 }
 
+/* Right-hand side Info */
 .row p {
     margin-left: 50px;
 }
 
+/* Buttons */
 button {
     padding: 10px 20px;
     background-color: #1174e6;
     color: #fff;
-    border: none;
-    border-radius: 4px;
+    border: none;       /* Remove Default Border */
+    border-radius: 4px; /* Curve Corners*/
     cursor: pointer;
     font-size: 0.8em;
     font-family: 'Ericsson';
 }
-
 button:hover {
     background-color: #4784e;
 }
 
+/* Logout Button */
 #logout {
     margin-top: 30px;
     width: 190px;
@@ -66,41 +73,23 @@ button:hover {
     margin-bottom: 15px;
 }
 
+/* Delete Buttons */
 .delete {
     background-color: #f06060;
     margin-left: auto;
     margin-right: auto;
     display: block;
+    font-size: 0.3em;
+    padding: 5px;
 }
 
+/* Buttons */
 #logout a, .delete a {
     color: white;
     text-decoration: none;
 }
 
-.booking {
-    display: flex;
-    flex-flow: column;
-    background-color: #EEE;
-    border-radius: 10px;
-    padding: 10px 25px;
-    margin-bottom: 20px;
-}
-
-.delete {
-    font-size: 0.3em;
-    padding: 5px;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-}
-
-input {
-    font-family: 'Ericsson';
-    padding: 5px;
-    font-size: 1em;
-}
-
+/* Table and table content */
 table {
     border: 1px solid #66;
 }
@@ -116,19 +105,19 @@ td {
 }
 
 tr:nth-child(even) {
-    background-color: #DFDFDF;
+    background-color: #DFDFDF; /* Alternating Row Color */
 }
 
-td:nth-child(8) {
+td:nth-child(8) { /* Delete Button for bookings */
     padding: 0;
     width: 40px;
 }
 
-#messageTable tr td:nth-child(4) {
+#messageTable tr td:nth-child(4) { /* Delete Button for contact */
     padding: 0;
     width: 40px;
 }
 
-h2 {
+h2 { /* Sub-Headings */
     font-size: 1.8em;
 }

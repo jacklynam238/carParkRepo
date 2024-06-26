@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!-- CSS -->
         <link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
     </head>
     <body class="background-tint">
+
+        <!-- Navigation Bar -->
         <nav>
             <ul id="navigation"></ul>
         </nav>
 
+        <!-- Background Image with Heading at top of each page-->
         <div class="welcome-container">
             <h1>About Us</h1>
         </div>
 
+        <!-- Section with White Background Below the Heading -->
         <div class="content-container">
+            <!-- Paragraph -->
             <h1>Our Team</h1>
             <p>
                 Epark is a pioneering company that developed an
@@ -32,8 +38,11 @@
 
             <br><br><br>
 
+            <!-- Row -->
             <div class="row">
+                <!-- Image -->
                 <img style="width: 500px; height: 300px;" src="{{url_for('static', filename='images/egolf.jpeg')}}" alt="">
+                <!-- Paragraph -->
                 <div>
                     <h1>Our Idea</h1>
                     <p>
@@ -54,6 +63,7 @@
               </div>
         </div>
 
+        <!-- Footer -->
         </div>
             <div class="footer">
             <p>&copy; 2024 EPark. All rights reserved.</p>
@@ -64,6 +74,7 @@
             </p>
         </div>
 
+        <!-- Javascript -->
         <script type="text/javascript"> let userId = {{userId}} </script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/navigation.js') }}"></script>
     </body>

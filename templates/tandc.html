@@ -6,14 +6,18 @@
     </head>
 
     <body class="background-tint">
+
+        <!-- Navigation Bar -->
         <nav>
             <ul id="navigation"></ul>
         </nav>
 
+        <!-- Background Image with Heading at top of each page-->
         <div class="welcome-container">
             <h1>Terms and Conditions</h1>
         </div>
 
+        <!-- Section with White Background Below the Heading -->
         <div class="content-container">
             <h2>1. General Terms</h2>
             <p>By using Ericsson Car Park, you agree to comply with and be bound by the following terms and conditions. Please review them carefully. If you do not agree to these terms, you should not use this car park.</p>
@@ -43,6 +47,7 @@
             <p>If you have any questions regarding these terms and conditions, please contact Ericsson's facility management team at <a href="mailto:facilities@ericsson.com">facilities@ericsson.com</a>.</p>
         </div>
 
+        <!-- Footer -->
         <div class="footer">
             <p>&copy; 2024 EPark. All rights reserved.</p>
             <p>
@@ -52,6 +57,7 @@
             </p>
         </div>
 
+        <!-- Javascript -->
         <script type="text/javascript"> let userId = {{userId}} </script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/navigation.js') }}"></script>
     </body>

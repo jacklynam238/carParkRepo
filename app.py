@@ -40,6 +40,7 @@ class Account(db.Model):
     email = db.Column(db.String())
     password = db.Column(db.String())
     fullname = db.Column(db.String())
+    registration = db.Column(db.String())
 
 @app.route('/')
 def index():
@@ -77,7 +78,8 @@ def account(error):
     userAccount = Account.query.filter_by(id=session['userId']).first()
     userName = userAccount.fullname
     userEmail = userAccount.email
-    data = [userName, userEmail]
+    userReg = userAccount.registration
+    data = [userName, userEmail, userReg]
     
     bookings = Booking.query.filter_by(accountID=session['userId'])
     futureBookings = bookings.filter(Booking.date >= datetime.today())
@@ -150,6 +152,7 @@ def submit_signup():
         email = request.form['email']
         password = request.form['password']
         confirmPassword = request.form['confirmPassword']
+        registration = request.form['carReg']
 
         #Errors
         if confirmPassword != password:
@@ -174,7 +177,7 @@ def submit_signup():
             return render_template('signup.html', error=6)
 
         #Upload
-        newAccount = Account(fullname=name, email=email, password=password)
+        newAccount = Account(fullname=name, email=email, password=password, registration=registration)
         db.session.add(newAccount)
         db.session.commit()
 
@@ -211,11 +214,13 @@ def logout():
     session['userId'] = 0
     return redirect('/')
 
-@app.route('/deleteBooking/<bookingId>')
-def deleteBooking(bookingId):
+@app.route('/deleteBooking/<bookingId>/<destination>')
+def deleteBooking(bookingId, destination):
     booking = Booking.query.filter_by(id=bookingId).first()
     db.session.delete(booking)
     db.session.commit()
+    if destination == "1":
+        return redirect('/admin')
     return redirect('/account/0')
 
 @app.route('/deleteAccount')
@@ -225,6 +230,13 @@ def deleteAccount():
     db.session.commit()
     session['userId'] = 0
     return redirect('/')
+
+@app.route('/deleteMessage/<messageId>')
+def deleteMessage(messageId):
+    message = Message.query.filter_by(id=messageId).first()
+    db.session.delete(message)
+    db.session.commit()
+    return redirect('/admin')
 
 @app.route('/updateBooking', methods=['POST'])
 def updateBooking():
@@ -295,6 +307,47 @@ def submitContact():
         db.session.commit()
         return redirect('/')
     return redirect('contact/0')
+
+@app.route('/admin')
+def admin():
+    userAccount = Account.query.filter_by(id=session['userId']).first()
+    userName = userAccount.fullname
+    userEmail = userAccount.email
+    userReg = userAccount.registration
+    data = [userName, userEmail, userReg]
+
+    futureBookings = Booking.query.filter(Booking.date >= datetime.today())
+    bookingData = []
+    for index in range(len(list(futureBookings))):
+        booking = futureBookings[index]
+        user = Account.query.filter_by(id=booking.accountID).first()
+        bookingDataElement = [0, 0, 0, 0, 0, 0, 0, 0]
+
+        bookingDataElement[0] = user.fullname
+        bookingDataElement[1] = user.email
+        bookingDataElement[7] = user.registration
+        bookingDataElement[2] = str(booking.date)
+        bookingDataElement[3] = str(booking.startTime)
+        bookingDataElement[4] = str(booking.endTime)
+        bookingDataElement[5] = booking.parkSpot
+        bookingDataElement[6] = booking.id
+
+        bookingData.append(bookingDataElement)
+
+    messages = Message.query.all()
+    messageData = []
+    for index in range(len(list(messages))):
+        message = messages[index]
+        messageDataElement = [0, 0, 0, 0]
+
+        messageDataElement[1] = message.fullname
+        messageDataElement[2] = message.email
+        messageDataElement[3] = message.message
+        messageDataElement[0] = message.id
+
+        messageData.append(messageDataElement)
+
+    return render_template('admin.html', userId=session['userId'], data=data, bookings=bookingData, messages=messageData)
 
 @app.route('/jsGet', methods=['POST'])
 def jsGet():

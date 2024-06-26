@@ -1,73 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Account Page</title>
+        <!-- CSS -->
         <link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/account.css') }}">
     </head>
     <body>
+        <!-- Navigation Bar -->
         <nav>
             <ul id="navigation"></ul>
         </nav>
 
+        <!-- Section with White Background Below the Heading -->
         <div class="content-container">
+            <!-- User Info -->
             <h1>Account Page</h1>
             <div class="user-info">
                 <h2>User Information</h2>
+                <!-- Full Name -->
                 <div class="row">
                     <label for="username">Full name:</label>
                     <p style="margin-left: auto;" id="username">{{ data[0] }}</p>
                 </div>
+                <!-- Email -->
                 <div class="row">
                     <label for="email">Email:</label>
                     <p style="margin-left: auto;" id="email">{{ data[1] }}</p>
                 </div>
+                <!-- Registration -->
                 <div class="row">
-                    <label for="email">Password:</label>
-                    <button style="margin-left: auto;" type="submit">Update Password</button>
+                    <label for="registration">Registration:</label>
+                    <p style="margin-left: auto;" id="registration">{{ data[2] }}</p>
                 </div>
             </div>
 
+            <!-- Booking List -->
             <div style="margin-top: 20px;" class="booking-container">
                 <h2>Bookings</h2>
+                <!-- Error Container: Errors show up here -->
                 <div id="errorContainer"></div>
+                <!-- For Every Booking in the database -->
                 {% for booking in bookingData %}
-                <form action="/updateBooking" method="POST" class="booking">
+                <form action="/updateBooking" method="POST" class="booking">]
+                    <!-- Booking ID -->
                     <input type="hidden" name="bookingId" value="{{ booking[5] }}">
+                    <!-- Booking Number -->
                     <h2>Booking {{ booking[0]  }}</h2>
+                    <!-- Booking Date -->
                     <div class="row">
                         <label>Date:</label>
                         <p style="margin-left: auto;" class="date">{{ booking[1] }}</p>
                     </div>
+                    <!-- Booking Times -->
                     <div class="row">
                         <label>Start/End Times:</label>
                         <p style="margin-left: auto;" class="times">{{ booking[2] }} until {{ booking[3] }}</p>
                     </div>
+                    <!-- Booking Spot -->
                     <div class="row">
                         <label>Parking Spot:</label>
                         <p style="margin-left: auto;" class="spot">{{ booking[4] }}</p>
                     </div>
+
+                    <!-- Delete/Update Buttons -->
                     <div class="row buttonContainer">
-                        <button style="margin-left: auto;" class="delete"><a href="/deleteBooking/{{ booking[5] }}">Delete Booking</a></button>
+                        <button style="margin-left: auto;" class="delete"><a href="/deleteBooking/{{ booking[5] }}/0">Delete Booking</a></button>
                         <button style="width: auto;" class="update" onClick="updateBooking({{ booking[0] }})">Update Booking</button>
                     </div>
                 </form>
                 {% endfor %}
             </div>
 
+            <!-- Account Buttons -->
             <div class="row">
                 <button style="margin-left: auto;" class="delete"><a href="/deleteAccount">Delete Account</a></button>
                 <button style="margin-left: 20px;" id="logout"><a href="/logout">Logout</a></button>
             </div>
         </div>
 
+        <!-- Footer -->
+        <div class="footer">
+            <p>&copy; 2024 EPark. All rights reserved.</p>
+            <p>
+                <a href="/tandc">Terms and Conditions</a>
+                <a href="/about">About Us</a>
+                <a href="/contact">Contact Us</a>
+            </p>
+        </div>
+
+        <!-- Javascript -->
         <script type="text/javascript">
             let userId = {{userId}}
             let error = {{error}}
         </script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/navigation.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/account.js') }}"></script>
-    </body>\
+    </body>
 </html>

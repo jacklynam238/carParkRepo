@@ -1,0 +1,134 @@
+body {
+    background: white;
+    height: 100%;
+}
+
+.content-container {
+    background: white;
+    width: 80%;
+    height: auto;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    padding: 3% 10vw;
+    margin: 0;
+    max-width: 100%;
+    font-family: 'Ericsson';
+}
+
+.content-container h1 {
+    font-size: 3em;
+}
+
+.user-info{
+    width: 94%;
+    border: 2px solid black;
+    padding: 2% 3%;
+    background: #EEE;
+    border-radius: 15px;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    font-size: 1.3em;
+}
+
+.row label {
+    margin: 0;
+    padding: 0;
+}
+
+.row p {
+    margin-left: 50px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #1174e6;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8em;
+    font-family: 'Ericsson';
+}
+
+button:hover {
+    background-color: #4784e;
+}
+
+#logout {
+    margin-top: 30px;
+    width: 190px;
+    font-size: 1em;
+    margin-bottom: 15px;
+}
+
+.delete {
+    background-color: #f06060;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+#logout a, .delete a {
+    color: white;
+    text-decoration: none;
+}
+
+.booking {
+    display: flex;
+    flex-flow: column;
+    background-color: #EEE;
+    border-radius: 10px;
+    padding: 10px 25px;
+    margin-bottom: 20px;
+}
+
+.delete {
+    font-size: 0.3em;
+    padding: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+input {
+    font-family: 'Ericsson';
+    padding: 5px;
+    font-size: 1em;
+}
+
+table {
+    border: 1px solid #66;
+}
+
+th {
+    text-align: left;
+    font-weight: 600;
+    font-size: 1.1em;
+}
+
+td {
+    padding-left: 5px;
+}
+
+tr:nth-child(even) {
+    background-color: #DFDFDF;
+}
+
+td:nth-child(8) {
+    padding: 0;
+    width: 40px;
+}
+
+#messageTable tr td:nth-child(4) {
+    padding: 0;
+    width: 40px;
+}
+
+h2 {
+    font-size: 1.8em;
+}

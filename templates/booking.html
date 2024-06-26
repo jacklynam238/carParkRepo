@@ -1,76 +1,48 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!-- CSS -->
         <link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/booking.css') }}">
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                background-color: #f9f9f9;
-                height: 100vh;
-                margin: 0;
-            }
-            .container {
-                text-align: center;
-            }
-            h1 {
-                color: #333;
-            }
-            .seats {
-                display: flex;
-                justify-content: center;
-                margin-top: 20px;
-            }
-            .seat {
-                width: 50px;
-                height: 50px;
-                background-color: #ccc;
-                margin: 5px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                cursor: pointer;
-                transition: background-color 0.3s;
-            }
-            .seat.selected {
-                background-color: #1174e6;
-                color: white;
-            }
-            .seat.unavailable {
-                background-color: red;
-                color: white;
-            }
-        </style>
     </head>
     <body class="background-tint">
+
+        <!-- Navigation Bar -->
         <nav>
-            <ul id="navigation">
-            </ul>
+            <ul id="navigation"></ul>
         </nav>
 
+        <!-- Background Image with Heading at top of each page-->
         <div class="welcome-container">
             <h1>Book Now</h1>
         </div>
 
-        <!-- Booking Section -->
+        <!-- Section with White Background Below the Heading -->
         <div class="content-container">
+            <!-- Error Container: Errors show up here -->
             <div id="errorContainer"></div>
+            <!-- Booking Form -->
             <h1>Book Your parking spot</h1>
             <form id="booking-form" onkeydown="return event.key != 'Enter';" action="{{ url_for('submit_booking') }}" method="POST">
+                <!-- Date -->
                 <div class="form-group">
                     <label for="date">Booking Date</label>
                     <input type="date" id="date" name="date" required>
                 </div>
+                <!-- Start Time -->
                 <div class="form-group">
                     <label for="time">Start Time</label>
                     <input type="time" id="time" name="time" required>
                 </div>
+                <!-- End Time -->
                 <div class="form-group">
                     <label for="endTime">End Time</label>
                     <input type="time" id="endTime" name="endTime" required>
                 </div>
+                <!-- Park Seat -->
                 <div class="container">
                     <h1>Select Your Spot</h1>
+                    <!-- Parking Spots -->
                     <div class="seats">
                         <div class="seat" data-seat="1">1</div>
                         <div class="seat" data-seat="2">2</div>
@@ -82,10 +54,12 @@
                     </div>
                     <input type="hidden" id="parkSpot" name="parkSpot" value="0">
                 </div>
+                <!-- Submit Button -->
                 <button type="submit">Book Now</button>
             </form>
         </div>
 
+        <!-- Footer -->
         <div class="footer">
             <p>&copy; 2024 EPark. All rights reserved.</p>
             <p>
@@ -94,6 +68,8 @@
                 <a href="/contact">Contact Us</a>
             </p>
         </div>
+
+        <!-- Javascript -->
         <script type="text/javascript">
             let userId = {{ userId|tojson }};
             const requestUrl = {{ url_for('jsGet')|tojson }};

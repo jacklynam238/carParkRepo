@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!-- CSS -->
         <link rel="stylesheet" href="{{ url_for('static', filename='css/thankyou.css') }}">
     </head>
 
     <body class="background-tint">
+        <!-- Thank you Container -->
         <div class="thankyou-container">
             <h2>Thank You For Signing Up!</h2>
+            <!-- Buttons -->
             <span>
-                <button><a href="/booking">Book a Parking Spot</a></button>
+                <button><a href="/booking/0">Book a Parking Spot</a></button>
                 <button><a href="/">Return to Welcome Page</a></button>
             </span>
         </div>

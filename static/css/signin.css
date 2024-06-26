@@ -12,24 +12,25 @@ body {
 
 .signupContainer {
     background-color: #fff;
-    padding: 20px;
+    padding: 10px;
     display: block;
-    margin: 20px auto;
+    margin: 10px auto;
     border-radius: 8px;
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.8);
     width: 100%;
     max-width: 400px;
     text-align:center;
     font-family: 'Ericsson';
+    font-size: 0.8em;
 }
 
 .signupContainer h2 {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     text-align: center;
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     text-align: left;
 }
 
@@ -76,10 +77,15 @@ button:hover {
 }
 #background {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    bottom: 0;
+    right: 0;
     object-fit: cover;
     z-index: -1;
+    /* Make video to at least 100% wide and tall */
+  min-width: 100%;
+  min-height: 100%;
+
+  /* Setting width & height to auto prevents the browser from stretching or squishing the video */
+  width: auto;
+  height: 140vh;
  }

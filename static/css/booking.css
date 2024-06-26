@@ -1,6 +1,10 @@
     /* Background */
 body {
     background-image: url("../images/turbine12crop.jpg");
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    margin: 0;
+}
 
 .welcome-container {
     display: flex;
@@ -36,11 +40,11 @@ body {
     font-family: 'Ericsson';
     padding-bottom: 180px;
 }
-    /* Book Your Parking Spot */
+
 .content-container h1 {
     font-size: 3em;
 }
-    /* Box Headings */
+
 .form-group {
     margin-bottom: 15px;
     text-align: left;
@@ -50,7 +54,7 @@ label {
     display: block;
     margin-bottom: 5px;
 }
-    /* Boxes */
+
 input {
     width: 100%;
     padding: 10px;
@@ -60,7 +64,7 @@ input {
     font-family: 'Ericsson';
 
 }
-    /* Book Button */
+
 button {
     padding: 10px 20px;
     background-color: #1174e6;
@@ -80,7 +84,7 @@ button {
 button:hover {
     background-color: #003a99;
 }
-    /* Error Message */
+
 .error {
     background-color: #fad22d;
     padding: 20px;
@@ -94,4 +98,40 @@ button:hover {
     margin: 0;
     margin-bottom: 10px;
     text-align: left;
+}
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+}
+
+.seats {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.seat {
+    width: 50px;
+    height: 50px;
+    background-color: #ccc;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.seat.selected {
+    background-color: #1174e6;
+    color: white;
+}
+
+.seat.unavailable {
+    background-color: red;
+    color: white;
 }

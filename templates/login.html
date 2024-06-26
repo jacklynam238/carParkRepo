@@ -1,30 +1,40 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!-- CSS -->
         <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
     </head>
 
     <body class="background-tint">
+
+        <!-- Login Container -->
         <div class="log-in-container">
+            <!-- Error Container: Errors show up here -->
             <div id="errorContainer"></div>
             <h2>Log In</h2>
+            <!-- Form -->
             <form id="booking-form" action="/submit_login" method="POST">
+                <!-- Email -->
                 <div class="form-group">
                     <label for="email">Email Address</label>
                     <input type="email" id="email" name="email" required>
                 </div>
+                <!-- Password -->
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" required>
                 </div>
-                  <button type="submit">Log In</button>
+                <!-- Submit Button -->
+                <button type="submit">Log In</button>
             </form>
         </div>
-        <div id="content">
-        <video width= "100%" autoplay muted id="background">
-            <source src="../static/videos/backgroundvid.mp4" type="video/MP4">
-          </video>
 
+        <!-- Background Video -->
+        <video width= "100%" height="100%" autoplay muted id="background">
+            <source src="../static/videos/backgroundvid.mp4" type="video/MP4">
+        </video>
+
+        <!-- Javascript -->
         <script type="text/javascript"> let error = {{error}} </script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/login.js') }}"></script>
     </body>

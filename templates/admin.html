@@ -1,71 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Admin</title>
+        <!-- CSS -->
         <link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/account.css') }}">
-
-        <style>
-            table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-                tr:nth-child(even) {
-  background-color: #D6EEEE;
-}
-        </style>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
     </head>
     <body>
+
+        <!-- Navigation Bar -->
         <nav>
             <ul id="navigation"></ul>
         </nav>
 
+        <!-- Section with White Background Below the Heading -->
         <div class="content-container">
+            <!-- User Info -->
             <h1>Admin</h1>
             <div class="user-info">
                 <h2>User Information</h2>
+                <!-- Full Name -->
                 <div class="row">
                     <label for="username">Full name:</label>
-                    <p style="margin-left: auto;" id="username">Paul</p>
+                    <p style="margin-left: auto;" id="username">{{ data[0] }}</p>
                 </div>
+                <!-- Email -->
                 <div class="row">
                     <label for="email">Email:</label>
-                    <p style="margin-left: auto;" id="email">francis</p>
+                    <p style="margin-left: auto;" id="email">{{ data[1] }}</p>
                 </div>
+                <!-- Registration -->
                 <div class="row">
-                    <label for="email">Password:</label>
-                    <button style="margin-left: auto;" type="submit">Update Password</button>
+                    <label for="registration">Registration:</label>
+                    <p style="margin-left: auto;" id="registration">{{ data[2] }}</p>
                 </div>
             </div>
-            <div>
-            <h1>username</h1>
-             <table style="width:100%">
-              <tr>
-                <th>username</th>
-                <th>email</th>
-                <th>booking number</th>
-              </tr>
-                 <tr>
-                <td>username</td>
-                <td>email</td>
-                <td>booking number</td>
-              </tr>
-                 <tr>
-                <td>username</td>
-                <td>email</td>
-                <td>booking number</td>
-              </tr>
-             </table>
+
+            <!-- Booking Table -->
+            <div style="margin-top: 40px;">
+                <h2>Bookings</h2>
+                <table style="width:100%">
+                    <!-- If there is at least one booking -->
+                    {% if bookings[0] is defined %}
+                    <!-- Table Headings -->
+                    <tr>
+                        <th>User's Name</th>
+                        <th>Email</th>
+                        <th>Registration</th>
+                        <th>Booking Id</th>
+                        <th>Booking Date</th>
+                        <th>Booking Start</th>
+                        <th>Booking End</th>
+                        <th>Park Spot</th>
+                        <th>Delete</th>
+                    </tr>
+                    {% endif %}
+                    <!-- For every booking in the database -->
+                    {% for booking in bookings %}
+                    <!-- Booking Info -->
+                    <tr>
+                        <td>{{ booking[0] }}</td>
+                        <td>{{ booking[1] }}</td>
+                        <td>{{ booking[7] }}</td>
+                        <td>{{ booking[6] }}</td>
+                        <td>{{ booking[2] }}</td>
+                        <td>{{ booking[3] }}</td>
+                        <td>{{ booking[4] }}</td>
+                        <td>{{ booking[5] }}</td>
+                        <!-- Delete Button -->
+                        <td><button class="delete"><a href="/deleteBooking/{{ booking[6] }}/1"><img width="40px" src="{{ url_for('static', filename='images/binIcon.png') }}" alt="delete"></a></button></td>
+                    </tr>
+                    {% endfor %}
+                </table>
             </div>
 
+            <!-- Message Table -->
+            <div style="margin-top: 40px;">
+                <h2>Messages</h2>
+                <table id="messageTable" style="width:100%">
+                    <!-- If there is at least one message -->
+                    {% if messages[0] is defined %}
+                    <!-- Table Headings -->
+                    <tr>
+                        <th>User's Name</th>
+                        <th>Email</th>
+                        <th>Message</th>
+                        <th>Delete</th>
+                    </tr>
+                    {% endif %}
+                    <!-- For every message is in the database -->
+                    {% for message in messages %}
+                    <!-- Message data -->
+                    <tr>
+                        <td>{{ message[1] }}</td>
+                        <td>{{ message[2] }}</td>
+                        <td>{{ message[3] }}</td>
+                        <td><button class="delete"><a href="/deleteMessage/{{ message[0] }}"><img width="40px" src="{{ url_for('static', filename='images/binIcon.png') }}" alt="delete"></a></button></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
 
+            <!-- Logout Button -->
             <div class="row">
-                <button style="margin-left: 20px;" id="logout"><a href="/logout">Logout</a></button>
+                <button style="margin-left: auto; margin-top: 60px;" id="logout"><a href="/logout">Logout</a></button>
             </div>
         </div>
 
-        <script type="text/javascript"> let userId = {{userId}} </script>
+        <!-- Footer -->
+        <div class="footer">
+            <p>&copy; 2024 EPark. All rights reserved.</p>
+            <p>
+                <a href="/tandc">Terms and Conditions</a>
+                <a href="/about">About Us</a>
+                <a href="/contact">Contact Us</a>
+            </p>
+        </div>
+
+        <!-- Javascript -->
+        <script type="text/javascript"> let userId = {{userId}}; </script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/navigation.js') }}"></script>
-    </body>\
+    </body>
 </html>
